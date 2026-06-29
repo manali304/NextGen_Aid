@@ -1,0 +1,29 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ElderCareEmergency",
+    "kind": "connection",
+    "type": "uipath-http-webhook",
+    "apiVersion": "integrationservice.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "connectorName": "HTTP Webhook",
+      "name": "ElderCareEmergency",
+      "description": null,
+      "authenticationType": "AuthenticateAfterDeployment",
+      "connectorVersion": "1.5.8",
+      "connectorKey": "uipath-http-webhook",
+      "pollingInterval": 5
+    },
+    "locks": [],
+    "key": "731c779e-08cf-4830-8699-86066b8966eb"
+  }
+}

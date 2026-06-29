@@ -1,0 +1,63 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Approve Ambulance Dispatch",
+    "kind": "process",
+    "type": "webApp",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "7624bc13-bfdb-4896-9396-096f07a2c637",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "Approve Ambulance Dispatch",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "entryPointUniqueId": null,
+      "inputArgumentsSchema": null,
+      "outputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": null,
+      "outputArgumentsSchemaV2": null,
+      "type": "WebApp",
+      "name": "Approve Ambulance Dispatch",
+      "description": null,
+      "package": {
+        "key": "3bfcae90-8047-43b1-9794-a80d268a10ee"
+      },
+      "packageName": "NextGen.Aid.webApp.Approve.Ambulance.Dispatch",
+      "packageVersion": null,
+      "entryPointName": null,
+      "inputArguments": "{}",
+      "jobPriority": "Medium",
+      "hiddenForAttendedUser": true,
+      "alwaysRunning": true,
+      "autoStartProcess": false,
+      "jobRecording": "Disabled",
+      "targetFrameworkValue": "Portable",
+      "duration": 40,
+      "frequency": 500,
+      "quality": 100,
+      "remoteControlAccess": "None",
+      "robotSize": "Automatic",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": null,
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "bcbbab61-97b0-4963-b825-3366f7425e38"
+  }
+}

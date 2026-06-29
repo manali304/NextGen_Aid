@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "JsonParseRPA",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "46cb810a-b184-4e16-9667-66935fd8f139",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "JsonParseRPA",
+      "description": null
+    },
+    "locks": [],
+    "key": "3a84cdf8-0218-4888-af51-4fd21a10a91f"
+  }
+}

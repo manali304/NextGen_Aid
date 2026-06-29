@@ -1,0 +1,56 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Agentic Process",
+    "kind": "process",
+    "type": "processOrchestration",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "840db2a9-023b-4c5c-a594-fec8c37ac705",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "Agentic Process",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "entryPointUniqueId": null,
+      "inputArgumentsSchema": null,
+      "outputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": null,
+      "outputArgumentsSchemaV2": null,
+      "type": "ProcessOrchestration",
+      "name": "Agentic Process",
+      "description": null,
+      "package": {
+        "key": "aaeeddf4-9c29-406d-b43f-341adf4b4747"
+      },
+      "packageName": "NextGen.Aid.agentic.Agentic.Process",
+      "packageVersion": null,
+      "entryPointName": null,
+      "inputArguments": "{}",
+      "hiddenForAttendedUser": false,
+      "alwaysRunning": false,
+      "autoStartProcess": false,
+      "targetFrameworkValue": "Portable",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": null,
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "9a4c99ae-efce-4258-9c59-bb29eb884218"
+  }
+}

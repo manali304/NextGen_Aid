@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:uipath="http://uipath.org/schema/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" exporter="UiPath Studio Web (https://uipath.com)" exporterVersion="e9e1aef3">
+  <bpmn:process id="ElderCareEmergencyResponse" name="eldercare_emergency">
+    <bpmn:extensionElements>
+      <uipath:variables version="v1">
+        <uipath:inputOutput id="error5" name="Error" type="jsonSchema" elementId="task_fraud"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outIsSuspicious" name="out_IsSuspicious" type="boolean" elementId="task_fraud" />
+        <uipath:inputOutput id="outReason" name="out_Reason" type="string" elementId="task_fraud" />
+        <uipath:inputOutput id="outRecommendation" name="out_Recommendation" type="string" elementId="task_fraud" />
+        <uipath:inputOutput id="error4" name="Error" type="jsonSchema" elementId="task_detect"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outIsEmergency" name="out_IsEmergency" type="boolean" elementId="task_detect" />
+        <uipath:inputOutput id="outConfidence" name="out_Confidence" type="number" elementId="task_detect" />
+        <uipath:inputOutput id="outEmergencyType" name="out_EmergencyType" type="string" elementId="task_detect" />
+        <uipath:inputOutput id="outSummary" name="out_Summary" type="string" elementId="task_detect" />
+        <uipath:inputOutput id="error6" name="Error" type="jsonSchema" elementId="task_severity"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outSeverityScore" name="out_SeverityScore" type="integer" elementId="task_severity" />
+        <uipath:inputOutput id="outSeverityLabel" name="out_SeverityLabel" type="string" elementId="task_severity" />
+        <uipath:inputOutput id="outReasoning" name="out_Reasoning" type="string" elementId="task_severity" />
+        <uipath:inputOutput id="outRecommendedResponse" name="out_RecommendedResponse" type="string" elementId="task_severity" />
+        <uipath:inputOutput id="outTimeSensitive" name="out_TimeSensitive" type="boolean" elementId="task_severity" />
+        <uipath:inputOutput id="outEtaMinutes" name="out_EtaMinutes" type="integer" elementId="task_severity" />
+        <uipath:inputOutput id="error9" name="Error" type="jsonSchema" elementId="task_assign_cg"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outCaregiverId" name="out_CaregiverId" type="string" elementId="task_assign_cg" />
+        <uipath:inputOutput id="outCaregiverName" name="out_CaregiverName" type="string" elementId="task_assign_cg" />
+        <uipath:inputOutput id="outCaregiverPhone" name="out_CaregiverPhone" type="string" elementId="task_assign_cg" />
+        <uipath:inputOutput id="outEtaMinutes2" name="out_EtaMinutes" type="integer" elementId="task_assign_cg" />
+        <uipath:inputOutput id="outAssigned" name="out_Assigned" type="boolean" elementId="task_assign_cg" />
+        <uipath:inputOutput id="error8" name="Error" type="jsonSchema" elementId="task_notify_critical"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outNotifiedCount" name="out_NotifiedCount" type="integer" elementId="task_notify_critical" />
+        <uipath:inputOutput id="outStatus" name="out_Status" type="string" elementId="task_notify_critical" />
+        <uipath:inputOutput id="error7" name="Error" type="jsonSchema" elementId="task_hospital"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outNearestHospital" name="out_NearestHospital" type="string" elementId="task_hospital" />
+        <uipath:inputOutput id="outHospitalEtaMinutes" name="out_HospitalEtaMinutes" type="integer" elementId="task_hospital" />
+        <uipath:inputOutput id="outHospitalPhone" name="out_HospitalPhone" type="string" elementId="task_hospital" />
+        <uipath:inputOutput id="outHospitalDistanceKm" name="out_HospitalDistanceKm" type="number" elementId="task_hospital" />
+        <uipath:inputOutput id="outHospitalsJson" name="out_HospitalsJson" type="string" elementId="task_hospital" />
+        <uipath:inputOutput id="error10" name="Error" type="jsonSchema" elementId="task_dispatch"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outDispatchId" name="out_DispatchId" type="string" elementId="task_dispatch" />
+        <uipath:inputOutput id="outDispatchedAt" name="out_DispatchedAt" type="string" elementId="task_dispatch" />
+        <uipath:inputOutput id="outEtaMinutes3" name="out_EtaMinutes" type="integer" elementId="task_dispatch" />
+        <uipath:inputOutput id="outAmbulanceUnit" name="out_AmbulanceUnit" type="string" elementId="task_dispatch" />
+        <uipath:inputOutput id="outDispatched" name="out_Dispatched" type="boolean" elementId="task_dispatch" />
+        <uipath:inputOutput id="error11" name="Error" type="jsonSchema" elementId="task_assign_standard"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outCaregiverId2" name="out_CaregiverId" type="string" elementId="task_assign_standard" />
+        <uipath:inputOutput id="outCaregiverName2" name="out_CaregiverName" type="string" elementId="task_assign_standard" />
+        <uipath:inputOutput id="outCaregiverPhone2" name="out_CaregiverPhone" type="string" elementId="task_assign_standard" />
+        <uipath:inputOutput id="outEtaMinutes4" name="out_EtaMinutes" type="integer" elementId="task_assign_standard" />
+        <uipath:inputOutput id="outAssigned2" name="out_Assigned" type="boolean" elementId="task_assign_standard" />
+        <uipath:inputOutput id="error14" name="Error" type="jsonSchema" elementId="task_notify_dispatch"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outNotifiedCount3" name="out_NotifiedCount" type="integer" elementId="task_notify_dispatch" />
+        <uipath:inputOutput id="outStatus3" name="out_Status" type="string" elementId="task_notify_dispatch" />
+        <uipath:inputOutput id="error13" name="Error" type="jsonSchema" elementId="task_notify_standard"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outNotifiedCount2" name="out_NotifiedCount" type="integer" elementId="task_notify_standard" />
+        <uipath:inputOutput id="outStatus2" name="out_Status" type="string" elementId="task_notify_standard" />
+        <uipath:inputOutput id="error15" name="Error" type="jsonSchema" elementId="task_monitor_arrival"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outArrivalConfirmed" name="out_ArrivalConfirmed" type="boolean" elementId="task_monitor_arrival" />
+        <uipath:inputOutput id="outArrivedAt" name="out_ArrivedAt" type="string" elementId="task_monitor_arrival" />
+        <uipath:inputOutput id="outAmbulanceUnit2" name="out_AmbulanceUnit" type="string" elementId="task_monitor_arrival" />
+        <uipath:inputOutput id="outFinalStatus" name="out_FinalStatus" type="string" elementId="task_monitor_arrival" />
+        <uipath:inputOutput id="error12" name="Error" type="jsonSchema" elementId="task_close_case"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outAuditLogUrl" name="out_AuditLogUrl" type="string" elementId="task_close_case" />
+        <uipath:inputOutput id="outClosedAt" name="out_ClosedAt" type="string" elementId="task_close_case" />
+        <uipath:inputOutput id="outCaseNumber" name="out_CaseNumber" type="string" elementId="task_close_case" />
+        <uipath:inputOutput id="error3" name="Error" type="jsonSchema" elementId="task_caregiver_checkin"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="action3" name="Action" type="string" elementId="task_caregiver_checkin" />
+        <uipath:inputOutput id="hitlTask3" name="hitlTask" type="jsonSchema" elementId="task_caregiver_checkin"><![CDATA[{"type":"object","displayName":"All Task Properties","properties":{"Id":{"type":"integer","description":"Task identifier"},"Key":{"type":"string","description":"Unique task identifier (UUID)"},"Title":{"type":"string","description":"Task title"},"Status":{"type":"string","description":"Task status: Unassigned, Pending, or Completed"},"Action":{"type":"string","description":"Action taken on the task"},"ActionLabel":{"type":"string","description":"Action display label"},"Priority":{"type":"string","description":"Task priority: Low, Medium, High, or Critical"},"Type":{"type":"string","description":"Task type (e.g. FormTask, AppTask, QuickFormTask)"},"Data":{"type":"object","description":"Task form field values"},"CompletedByUser":{"type":"object","description":"User who completed the task","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}},"AssignedToUser":{"type":"object","description":"User currently assigned to the task","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}},"AssignedToUserId":{"type":"integer","description":"ID of the assigned user"},"TaskAssignmentCriteria":{"type":"string","description":"Assignment criteria: SingleUser, Workload, AllUsers, RoundRobin, or Hierarchy"},"TaskAssignees":{"type":"array","description":"List of users assigned to the task","items":{"type":"object","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}}},"CompletionTime":{"type":"string","description":"Task completion timestamp"},"CreationTime":{"type":"string","description":"Task creation timestamp"},"LastModificationTime":{"type":"string","description":"Last modification timestamp"},"LastAssignedTime":{"type":"string","description":"Last assignment timestamp"},"OrganizationUnitId":{"type":"integer","description":"Folder/organization unit ID"},"OrganizationUnitFullyQualifiedName":{"type":"string","description":"Fully qualified folder name"},"ParentOperationId":{"type":"string","description":"Operation ID that created this task"},"CreatorJobKey":{"type":"string","description":"Key of the job that created this task (UUID)"},"ExternalTag":{"type":"string","description":"External system identifier"},"ProcessingTime":{"type":"integer","description":"Time spent in assigned state"},"WaitJobState":{"type":"string","description":"State of the waiting job"},"WaitJobKey":{"type":"string","description":"Key of the waiting job (UUID)"},"TaskSchemaKey":{"type":"string","description":"Schema key for QuickFormTask (UUID)"},"IsDeleted":{"type":"boolean"},"IsCurrentUserInAllUserAssignedGroup":{"type":"boolean"},"CreatorUserId":{"type":"integer","description":"ID of the user who created the task"},"LastModifierUserId":{"type":"integer","description":"ID of the last user to modify the task"},"DeleterUserId":{"type":"integer"},"DeletionTime":{"type":"string"},"Tags":{"type":"array","description":"Tags associated to the task","items":{"type":"object","properties":{"Name":{"type":"string"},"DisplayName":{"type":"string"},"Value":{"type":"string"},"DisplayValue":{"type":"string"}}}},"TaskDefinitionPropertiesId":{"type":"integer","description":"Task definition properties ID"},"AppTasksMetadata":{"type":"object","description":"App task metadata","properties":{"Id":{"type":"integer"},"AppId":{"type":"string","description":"Associated App ID"},"AppVersion":{"type":"integer","description":"Associated App version"},"AppProcessKey":{"type":"string","description":"App process key (UUID)"},"FolderKey":{"type":"string","description":"Folder key (UUID)"},"Runtime":{"type":"string","description":"Serverless or Unattended"},"AppType":{"type":"string","description":"Custom or Dynamic"},"CreationTime":{"type":"string"},"CreatorUserId":{"type":"integer"},"CreatorUserKey":{"type":"string","description":"Creator user key (UUID)"}}},"TaskSlaDetails":{"type":"array","description":"Task SLA details","items":{"type":"object","properties":{"ExpiryTime":{"type":"string","description":"SLA expiry timestamp"},"StartCriteria":{"type":"string","description":"TaskCreated, TaskAssigned, or TaskCompleted"},"EndCriteria":{"type":"string","description":"TaskCreated, TaskAssigned, or TaskCompleted"},"Status":{"type":"string","description":"OverdueLater, OverdueSoon, Overdue, or CompletedInTime"}}}},"TaskSource":{"type":"object","description":"Task source information","properties":{"SourceName":{"type":"string","description":"Agent, Workflow, Maestro, CaseManagement, or Default"},"SourceId":{"type":"string"},"JobId":{"type":"string"}}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="caregiverOutcome" name="caregiver_outcome" type="string" elementId="task_caregiver_checkin" />
+        <uipath:inputOutput id="heartRate" name="heart_rate" type="number" elementId="task_caregiver_checkin" />
+        <uipath:inputOutput id="bloodPressure" name="blood_pressure" type="string" elementId="task_caregiver_checkin" />
+        <uipath:inputOutput id="consciousness" name="consciousness" type="string" elementId="task_caregiver_checkin" />
+        <uipath:inputOutput id="injuryVisible" name="injury_visible" type="string" elementId="task_caregiver_checkin" />
+        <uipath:inputOutput id="vitalsNotes" name="vitals_notes" type="string" elementId="task_caregiver_checkin" />
+        <uipath:inputOutput id="error2" name="Error" type="jsonSchema" elementId="task_human_approve"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="action2" name="Action" type="string" elementId="task_human_approve" />
+        <uipath:inputOutput id="hitlTask2" name="hitlTask" type="jsonSchema" elementId="task_human_approve"><![CDATA[{"type":"object","displayName":"All Task Properties","properties":{"Id":{"type":"integer","description":"Task identifier"},"Key":{"type":"string","description":"Unique task identifier (UUID)"},"Title":{"type":"string","description":"Task title"},"Status":{"type":"string","description":"Task status: Unassigned, Pending, or Completed"},"Action":{"type":"string","description":"Action taken on the task"},"ActionLabel":{"type":"string","description":"Action display label"},"Priority":{"type":"string","description":"Task priority: Low, Medium, High, or Critical"},"Type":{"type":"string","description":"Task type (e.g. FormTask, AppTask, QuickFormTask)"},"Data":{"type":"object","description":"Task form field values"},"CompletedByUser":{"type":"object","description":"User who completed the task","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}},"AssignedToUser":{"type":"object","description":"User currently assigned to the task","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}},"AssignedToUserId":{"type":"integer","description":"ID of the assigned user"},"TaskAssignmentCriteria":{"type":"string","description":"Assignment criteria: SingleUser, Workload, AllUsers, RoundRobin, or Hierarchy"},"TaskAssignees":{"type":"array","description":"List of users assigned to the task","items":{"type":"object","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}}},"CompletionTime":{"type":"string","description":"Task completion timestamp"},"CreationTime":{"type":"string","description":"Task creation timestamp"},"LastModificationTime":{"type":"string","description":"Last modification timestamp"},"LastAssignedTime":{"type":"string","description":"Last assignment timestamp"},"OrganizationUnitId":{"type":"integer","description":"Folder/organization unit ID"},"OrganizationUnitFullyQualifiedName":{"type":"string","description":"Fully qualified folder name"},"ParentOperationId":{"type":"string","description":"Operation ID that created this task"},"CreatorJobKey":{"type":"string","description":"Key of the job that created this task (UUID)"},"ExternalTag":{"type":"string","description":"External system identifier"},"ProcessingTime":{"type":"integer","description":"Time spent in assigned state"},"WaitJobState":{"type":"string","description":"State of the waiting job"},"WaitJobKey":{"type":"string","description":"Key of the waiting job (UUID)"},"TaskSchemaKey":{"type":"string","description":"Schema key for QuickFormTask (UUID)"},"IsDeleted":{"type":"boolean"},"IsCurrentUserInAllUserAssignedGroup":{"type":"boolean"},"CreatorUserId":{"type":"integer","description":"ID of the user who created the task"},"LastModifierUserId":{"type":"integer","description":"ID of the last user to modify the task"},"DeleterUserId":{"type":"integer"},"DeletionTime":{"type":"string"},"Tags":{"type":"array","description":"Tags associated to the task","items":{"type":"object","properties":{"Name":{"type":"string"},"DisplayName":{"type":"string"},"Value":{"type":"string"},"DisplayValue":{"type":"string"}}}},"TaskDefinitionPropertiesId":{"type":"integer","description":"Task definition properties ID"},"AppTasksMetadata":{"type":"object","description":"App task metadata","properties":{"Id":{"type":"integer"},"AppId":{"type":"string","description":"Associated App ID"},"AppVersion":{"type":"integer","description":"Associated App version"},"AppProcessKey":{"type":"string","description":"App process key (UUID)"},"FolderKey":{"type":"string","description":"Folder key (UUID)"},"Runtime":{"type":"string","description":"Serverless or Unattended"},"AppType":{"type":"string","description":"Custom or Dynamic"},"CreationTime":{"type":"string"},"CreatorUserId":{"type":"integer"},"CreatorUserKey":{"type":"string","description":"Creator user key (UUID)"}}},"TaskSlaDetails":{"type":"array","description":"Task SLA details","items":{"type":"object","properties":{"ExpiryTime":{"type":"string","description":"SLA expiry timestamp"},"StartCriteria":{"type":"string","description":"TaskCreated, TaskAssigned, or TaskCompleted"},"EndCriteria":{"type":"string","description":"TaskCreated, TaskAssigned, or TaskCompleted"},"Status":{"type":"string","description":"OverdueLater, OverdueSoon, Overdue, or CompletedInTime"}}}},"TaskSource":{"type":"object","description":"Task source information","properties":{"SourceName":{"type":"string","description":"Agent, Workflow, Maestro, CaseManagement, or Default"},"SourceId":{"type":"string"},"JobId":{"type":"string"}}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="ambulanceApproved" name="ambulance_approved" type="string" elementId="task_human_approve" />
+        <uipath:inputOutput id="coordinatorNotes" name="coordinator_notes" type="string" elementId="task_human_approve" />
+        <uipath:inputOutput id="error" name="Error" type="jsonSchema" elementId="task_review"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="action" name="Action" type="string" elementId="task_review" />
+        <uipath:inputOutput id="hitlTask" name="hitlTask" type="jsonSchema" elementId="task_review"><![CDATA[{"type":"object","displayName":"All Task Properties","properties":{"Id":{"type":"integer","description":"Task identifier"},"Key":{"type":"string","description":"Unique task identifier (UUID)"},"Title":{"type":"string","description":"Task title"},"Status":{"type":"string","description":"Task status: Unassigned, Pending, or Completed"},"Action":{"type":"string","description":"Action taken on the task"},"ActionLabel":{"type":"string","description":"Action display label"},"Priority":{"type":"string","description":"Task priority: Low, Medium, High, or Critical"},"Type":{"type":"string","description":"Task type (e.g. FormTask, AppTask, QuickFormTask)"},"Data":{"type":"object","description":"Task form field values"},"CompletedByUser":{"type":"object","description":"User who completed the task","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}},"AssignedToUser":{"type":"object","description":"User currently assigned to the task","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}},"AssignedToUserId":{"type":"integer","description":"ID of the assigned user"},"TaskAssignmentCriteria":{"type":"string","description":"Assignment criteria: SingleUser, Workload, AllUsers, RoundRobin, or Hierarchy"},"TaskAssignees":{"type":"array","description":"List of users assigned to the task","items":{"type":"object","properties":{"Id":{"type":"integer"},"Name":{"type":"string"},"Surname":{"type":"string"},"UserName":{"type":"string"},"EmailAddress":{"type":"string"},"DisplayName":{"type":"string"},"Type":{"type":"string","description":"User, Robot, DirectoryUser, DirectoryGroup, DirectoryRobot, or DirectoryExternalApplication"},"AuthenticationSource":{"type":"string"}}}},"CompletionTime":{"type":"string","description":"Task completion timestamp"},"CreationTime":{"type":"string","description":"Task creation timestamp"},"LastModificationTime":{"type":"string","description":"Last modification timestamp"},"LastAssignedTime":{"type":"string","description":"Last assignment timestamp"},"OrganizationUnitId":{"type":"integer","description":"Folder/organization unit ID"},"OrganizationUnitFullyQualifiedName":{"type":"string","description":"Fully qualified folder name"},"ParentOperationId":{"type":"string","description":"Operation ID that created this task"},"CreatorJobKey":{"type":"string","description":"Key of the job that created this task (UUID)"},"ExternalTag":{"type":"string","description":"External system identifier"},"ProcessingTime":{"type":"integer","description":"Time spent in assigned state"},"WaitJobState":{"type":"string","description":"State of the waiting job"},"WaitJobKey":{"type":"string","description":"Key of the waiting job (UUID)"},"TaskSchemaKey":{"type":"string","description":"Schema key for QuickFormTask (UUID)"},"IsDeleted":{"type":"boolean"},"IsCurrentUserInAllUserAssignedGroup":{"type":"boolean"},"CreatorUserId":{"type":"integer","description":"ID of the user who created the task"},"LastModifierUserId":{"type":"integer","description":"ID of the last user to modify the task"},"DeleterUserId":{"type":"integer"},"DeletionTime":{"type":"string"},"Tags":{"type":"array","description":"Tags associated to the task","items":{"type":"object","properties":{"Name":{"type":"string"},"DisplayName":{"type":"string"},"Value":{"type":"string"},"DisplayValue":{"type":"string"}}}},"TaskDefinitionPropertiesId":{"type":"integer","description":"Task definition properties ID"},"AppTasksMetadata":{"type":"object","description":"App task metadata","properties":{"Id":{"type":"integer"},"AppId":{"type":"string","description":"Associated App ID"},"AppVersion":{"type":"integer","description":"Associated App version"},"AppProcessKey":{"type":"string","description":"App process key (UUID)"},"FolderKey":{"type":"string","description":"Folder key (UUID)"},"Runtime":{"type":"string","description":"Serverless or Unattended"},"AppType":{"type":"string","description":"Custom or Dynamic"},"CreationTime":{"type":"string"},"CreatorUserId":{"type":"integer"},"CreatorUserKey":{"type":"string","description":"Creator user key (UUID)"}}},"TaskSlaDetails":{"type":"array","description":"Task SLA details","items":{"type":"object","properties":{"ExpiryTime":{"type":"string","description":"SLA expiry timestamp"},"StartCriteria":{"type":"string","description":"TaskCreated, TaskAssigned, or TaskCompleted"},"EndCriteria":{"type":"string","description":"TaskCreated, TaskAssigned, or TaskCompleted"},"Status":{"type":"string","description":"OverdueLater, OverdueSoon, Overdue, or CompletedInTime"}}}},"TaskSource":{"type":"object","description":"Task source information","properties":{"SourceName":{"type":"string","description":"Agent, Workflow, Maestro, CaseManagement, or Default"},"SourceId":{"type":"string"},"JobId":{"type":"string"}}}},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="reviewerDecision" name="reviewer_decision" type="string" elementId="task_review" />
+        <uipath:inputOutput id="notes" name="notes" type="string" elementId="task_review" />
+      </uipath:variables>
+      <uipath:bindings version="v1">
+        <uipath:binding id="bqASmG5Lx" name="folderPath" type="string" resource="process" resourceKey="AmbulanceApproval" propertyAttribute="folderPath" />
+        <uipath:binding id="bB8VVWBXA" name="name" type="string" default="AmbulanceApproval" resource="process" resourceKey="AmbulanceApproval" propertyAttribute="name" />
+        <uipath:binding id="bQX66HFP0" name="folderPath" type="string" resource="app" resourceKey="AmbulanceApproval" propertyAttribute="folderPath" />
+        <uipath:binding id="bI7kLmslv" name="name" type="string" default="AmbulanceApproval" resource="app" resourceKey="AmbulanceApproval" propertyAttribute="name" />
+        <uipath:binding id="bfBEHzYmq" name="folderPath" type="string" resource="app" resourceKey="App 1" propertyAttribute="folderPath" />
+        <uipath:binding id="bjWhrsZCJ" name="name" type="string" default="App 1" resource="app" resourceKey="App 1" propertyAttribute="name" />
+        <uipath:binding id="brxWD5Kuu" name="folderPath" type="string" resource="app" resourceKey="AlertReview" propertyAttribute="folderPath" />
+        <uipath:binding id="bJRdX6QuK" name="name" type="string" default="AlertReview" resource="app" resourceKey="AlertReview" propertyAttribute="name" />
+        <uipath:binding id="biZmGZWf7" name="folderPath" type="string" resource="app" resourceKey="CaregiverCheckin" propertyAttribute="folderPath" />
+        <uipath:binding id="bcVQKHZm2" name="name" type="string" default="CaregiverCheckin" resource="app" resourceKey="CaregiverCheckin" propertyAttribute="name" />
+        <uipath:binding id="bGV5K38Ct" name="folderPath" type="string" resource="app" resourceKey="Review Suspicious Alert" propertyAttribute="folderPath" />
+        <uipath:binding id="bx5l2mBrL" name="name" type="string" default="Review Suspicious Alert" resource="app" resourceKey="Review Suspicious Alert" propertyAttribute="name" />
+        <uipath:binding id="bgFZyoYM4" name="folderPath" type="string" resource="app" resourceKey="Approve Ambulance Dispatch" propertyAttribute="folderPath" />
+        <uipath:binding id="bizVdMyVm" name="name" type="string" default="Approve Ambulance Dispatch" resource="app" resourceKey="Approve Ambulance Dispatch" propertyAttribute="name" />
+        <uipath:binding id="bys62kwKz" name="folderPath" type="string" resource="app" resourceKey="Approve Ambulance Dispatch" propertyAttribute="folderPath" />
+        <uipath:binding id="bg9y1cR2h" name="name" type="string" default="Approve Ambulance Dispatch" resource="app" resourceKey="Approve Ambulance Dispatch" propertyAttribute="name" />
+        <uipath:binding id="blvcWdW6V" name="folderPath" type="string" resource="process" resourceKey="ElderCare" propertyAttribute="folderPath" />
+        <uipath:binding id="bSk5beNis" name="name" type="string" default="ElderCare" resource="process" resourceKey="ElderCare" propertyAttribute="name" />
+        <uipath:binding id="b11sWDA3t" name="folderPath" type="string" resource="process" resourceKey="EmergencyDetector" propertyAttribute="folderPath" />
+        <uipath:binding id="bYPktl928" name="name" type="string" default="EmergencyDetector" resource="process" resourceKey="EmergencyDetector" propertyAttribute="name" />
+        <uipath:binding id="b7SjiIVzh" name="folderPath" type="string" resource="process" resourceKey="FraudGuard" propertyAttribute="folderPath" />
+        <uipath:binding id="b2sUvUwyP" name="name" type="string" default="FraudGuard" resource="process" resourceKey="FraudGuard" propertyAttribute="name" />
+        <uipath:binding id="bsNbjSbk3" name="folderPath" type="string" resource="process" resourceKey="SeverityScorer" propertyAttribute="folderPath" />
+        <uipath:binding id="bfFsksZan" name="name" type="string" default="SeverityScorer" resource="process" resourceKey="SeverityScorer" propertyAttribute="name" />
+        <uipath:binding id="b2Jh5ZD9K" name="folderPath" type="string" resource="process" resourceKey="HospitalFinder" propertyAttribute="folderPath" />
+        <uipath:binding id="bxcCY67J8" name="name" type="string" default="HospitalFinder" resource="process" resourceKey="HospitalFinder" propertyAttribute="name" />
+        <uipath:binding id="bcqyghjHc" name="folderPath" type="string" resource="process" resourceKey="WhatsAppNotifier" propertyAttribute="folderPath" />
+        <uipath:binding id="bu5mvCF5p" name="name" type="string" default="WhatsAppNotifier" resource="process" resourceKey="WhatsAppNotifier" propertyAttribute="name" />
+        <uipath:binding id="bF4wJnXUL" name="folderPath" type="string" resource="process" resourceKey="CaregiverMatcher" propertyAttribute="folderPath" />
+        <uipath:binding id="bNtbTUuyx" name="name" type="string" default="CaregiverMatcher" resource="process" resourceKey="CaregiverMatcher" propertyAttribute="name" />
+        <uipath:binding id="bwvc8CWrN" name="folderPath" type="string" resource="process" resourceKey="AmbulanceDispatch" propertyAttribute="folderPath" />
+        <uipath:binding id="bRLzvRr6y" name="name" type="string" default="AmbulanceDispatch" resource="process" resourceKey="AmbulanceDispatch" propertyAttribute="name" />
+        <uipath:binding id="bDuZglLRh" name="folderPath" type="string" resource="process" resourceKey="CaregiverMatcher" propertyAttribute="folderPath" />
+        <uipath:binding id="bSOqutqnP" name="folderPath" type="string" resource="process" resourceKey="WhatsAppNotifier" propertyAttribute="folderPath" />
+        <uipath:binding id="bM5NGU5XS" name="folderPath" type="string" resource="process" resourceKey="CaseCloser" propertyAttribute="folderPath" />
+        <uipath:binding id="bFNXKR5bG" name="name" type="string" default="CaseCloser" resource="process" resourceKey="CaseCloser" propertyAttribute="name" />
+        <uipath:binding id="bP8a3VT56" name="folderPath" type="string" resource="process" resourceKey="WhatsAppNotifier" propertyAttribute="folderPath" />
+        <uipath:binding id="bzLcCEO5j" name="folderPath" type="string" resource="process" resourceKey="NotifyAllDispatch" propertyAttribute="folderPath" />
+        <uipath:binding id="bTS8RCBSb" name="name" type="string" default="NotifyAllDispatch" resource="process" resourceKey="NotifyAllDispatch" propertyAttribute="name" />
+        <uipath:binding id="b9upkPRLq" name="folderPath" type="string" resource="process" resourceKey="AmbulanceTracker" propertyAttribute="folderPath" />
+        <uipath:binding id="bExQCFYCv" name="name" type="string" default="AmbulanceTracker" resource="process" resourceKey="AmbulanceTracker" propertyAttribute="name" />
+        <uipath:binding id="bptyOVZZ6" name="folderPath" type="string" resource="process" resourceKey="EmergencyDetector_1" propertyAttribute="folderPath" />
+        <uipath:binding id="bY1ebf9sH" name="name" type="string" default="EmergencyDetector_1" resource="process" resourceKey="EmergencyDetector_1" propertyAttribute="name" />
+        <uipath:binding id="bncRpALWg" name="folderPath" type="string" resource="process" resourceKey="FraudGuard_1" propertyAttribute="folderPath" />
+        <uipath:binding id="bXVsjpZsN" name="name" type="string" default="FraudGuard_1" resource="process" resourceKey="FraudGuard_1" propertyAttribute="name" />
+        <uipath:binding id="bG2ParAyp" name="folderPath" type="string" resource="process" resourceKey="SeverityScorer_1" propertyAttribute="folderPath" />
+        <uipath:binding id="b2X7TLxRq" name="name" type="string" default="SeverityScorer_1" resource="process" resourceKey="SeverityScorer_1" propertyAttribute="name" />
+        <uipath:binding id="bg741PKhY" name="folderPath" type="string" resource="process" resourceKey="CaregiverMatcher_1" propertyAttribute="folderPath" />
+        <uipath:binding id="b0TROg5fN" name="name" type="string" default="CaregiverMatcher_1" resource="process" resourceKey="CaregiverMatcher_1" propertyAttribute="name" />
+        <uipath:binding id="bmFteU3RS" name="folderPath" type="string" resource="process" resourceKey="WhatsAppNotifier_1" propertyAttribute="folderPath" />
+        <uipath:binding id="bRcbYfU6K" name="name" type="string" default="WhatsAppNotifier_1" resource="process" resourceKey="WhatsAppNotifier_1" propertyAttribute="name" />
+        <uipath:binding id="bM54ud82g" name="folderPath" type="string" resource="process" resourceKey="HospitalFinder_1" propertyAttribute="folderPath" />
+        <uipath:binding id="bxCK0B36K" name="name" type="string" default="HospitalFinder_1" resource="process" resourceKey="HospitalFinder_1" propertyAttribute="name" />
+        <uipath:binding id="b6yxrcjvL" name="folderPath" type="string" resource="process" resourceKey="AmbulanceDispatch_1" propertyAttribute="folderPath" />
+        <uipath:binding id="b06iOMFw1" name="name" type="string" default="AmbulanceDispatch_1" resource="process" resourceKey="AmbulanceDispatch_1" propertyAttribute="name" />
+        <uipath:binding id="bOEir9iYn" name="folderPath" type="string" resource="process" resourceKey="NotifyAllDispatch_1" propertyAttribute="folderPath" />
+        <uipath:binding id="buSD5avRp" name="name" type="string" default="NotifyAllDispatch_1" resource="process" resourceKey="NotifyAllDispatch_1" propertyAttribute="name" />
+        <uipath:binding id="bMUM4CrzC" name="folderPath" type="string" resource="process" resourceKey="CaregiverMatcher_1" propertyAttribute="folderPath" />
+        <uipath:binding id="bbMhixC5d" name="folderPath" type="string" resource="process" resourceKey="WhatsAppNotifier_1" propertyAttribute="folderPath" />
+        <uipath:binding id="bcFIDVsER" name="folderPath" type="string" resource="process" resourceKey="AmbulanceTracker_1" propertyAttribute="folderPath" />
+        <uipath:binding id="b9HGPMW7y" name="name" type="string" default="AmbulanceTracker_1" resource="process" resourceKey="AmbulanceTracker_1" propertyAttribute="name" />
+        <uipath:binding id="bNwADeo9z" name="folderPath" type="string" resource="process" resourceKey="CaseCloser_1" propertyAttribute="folderPath" />
+        <uipath:binding id="bpneakAaO" name="name" type="string" default="CaseCloser_1" resource="process" resourceKey="CaseCloser_1" propertyAttribute="name" />
+      </uipath:bindings>
+      <uipath:migrationVersion version="15" />
+      <uipath:intsvcActivityConfig version="v2" />
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="start_event" name="Emergency&#10;Signal Received">
+      <bpmn:documentation>Triggered by voice, WhatsApp, web form, or IoT sensor</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:entryPointId value="3844a71d-8524-41c6-995c-98adcf3f162c" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>flow_start_to_detect</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="task_detect" name="AI Emergency&#10;Detection">
+      <bpmn:documentation>Claude AI agent classifies the incoming signal as emergency or not. Outputs: is_emergency, confidence, emergency_type, summary</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bYPktl928" />
+            <uipath:input name="folderPath" type="string" value="=bindings.b11sWDA3t" />
+            <uipath:input name="_label" type="string" value="EmergencyDetector" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_RawText":{"type":"string"},"in_Source":{"type":"string"},"in_CaseId":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_RawText":null,"in_Source":null,"in_CaseId":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error4" />
+          <uipath:output name="out_IsEmergency" type="boolean" source="=out_IsEmergency" var="outIsEmergency" />
+          <uipath:output name="out_Confidence" type="number" source="=out_Confidence" var="outConfidence" />
+          <uipath:output name="out_EmergencyType" type="string" source="=out_EmergencyType" var="outEmergencyType" />
+          <uipath:output name="out_Summary" type="string" source="=out_Summary" var="outSummary" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_start_to_detect</bpmn:incoming>
+      <bpmn:outgoing>flow_detect_to_gw1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="gw_is_emergency" name="Is Emergency?" default="flow_gw1_to_dismiss">
+      <bpmn:incoming>flow_detect_to_gw1</bpmn:incoming>
+      <bpmn:outgoing>flow_gw1_to_fraud</bpmn:outgoing>
+      <bpmn:outgoing>flow_gw1_to_dismiss</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="task_fraud" name="Fraud Guard&#10;AI Agent">
+      <bpmn:documentation>Claude AI agent detects false alarms and duplicate calls. Outputs: is_suspicious, fraud_reason</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.b2sUvUwyP" />
+            <uipath:input name="folderPath" type="string" value="=bindings.b7SjiIVzh" />
+            <uipath:input name="_label" type="string" value="FraudGuard" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_RawText":{"type":"string"},"in_ElderId":{"type":"string"},"in_CaseId":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_RawText":null,"in_ElderId":null,"in_CaseId":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error5" />
+          <uipath:output name="out_IsSuspicious" type="boolean" source="=out_IsSuspicious" var="outIsSuspicious" />
+          <uipath:output name="out_Reason" type="string" source="=out_Reason" var="outReason" />
+          <uipath:output name="out_Recommendation" type="string" source="=out_Recommendation" var="outRecommendation" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_gw1_to_fraud</bpmn:incoming>
+      <bpmn:outgoing>flow_fraud_to_gw2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="gw_suspicious" name="Suspicious?" default="flow_gw2_to_severity">
+      <bpmn:incoming>flow_fraud_to_gw2</bpmn:incoming>
+      <bpmn:outgoing>flow_gw2_to_review</bpmn:outgoing>
+      <bpmn:outgoing>flow_gw2_to_severity</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="task_severity" name="Severity Scorer&#10;AI Agent">
+      <bpmn:documentation>Claude AI agent scores severity 1-5. Outputs: severity_score, severity_label, recommended_response, time_sensitive</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bfFsksZan" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bsNbjSbk3" />
+            <uipath:input name="_label" type="string" value="SeverityScorer" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_RawText":{"type":"string"},"in_EmergencyType":{"type":"string"},"in_Confidence":{"type":"number"},"in_CaseId":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_RawText":null,"in_EmergencyType":null,"in_Confidence":null,"in_CaseId":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error6" />
+          <uipath:output name="out_SeverityScore" type="integer" source="=out_SeverityScore" var="outSeverityScore" />
+          <uipath:output name="out_SeverityLabel" type="string" source="=out_SeverityLabel" var="outSeverityLabel" />
+          <uipath:output name="out_Reasoning" type="string" source="=out_Reasoning" var="outReasoning" />
+          <uipath:output name="out_RecommendedResponse" type="string" source="=out_RecommendedResponse" var="outRecommendedResponse" />
+          <uipath:output name="out_TimeSensitive" type="boolean" source="=out_TimeSensitive" var="outTimeSensitive" />
+          <uipath:output name="out_EtaMinutes" type="integer" source="=out_EtaMinutes" var="outEtaMinutes" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_gw2_to_severity</bpmn:incoming>
+      <bpmn:incoming>flow_review_genuine</bpmn:incoming>
+      <bpmn:outgoing>flow_severity_to_gw3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="gw_severity" name="Severity&#10;Level?" default="flow_sev_standard">
+      <bpmn:incoming>flow_severity_to_gw3</bpmn:incoming>
+      <bpmn:outgoing>flow_sev_critical</bpmn:outgoing>
+      <bpmn:outgoing>flow_sev_standard</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:parallelGateway id="pgw_split_critical" name="Parallel&#10;Actions">
+      <bpmn:incoming>flow_sev_critical</bpmn:incoming>
+      <bpmn:outgoing>flow_par_hospital</bpmn:outgoing>
+      <bpmn:outgoing>flow_par_notify_critical</bpmn:outgoing>
+      <bpmn:outgoing>flow_par_assign_cg_critical</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:serviceTask id="task_hospital" name="Find Nearest&#10;Hospital (ER)">
+      <bpmn:documentation>Robot queries Google Maps API for nearest ER. Outputs: nearest_hospital, hospital_eta_min, hospital_phone</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bxcCY67J8" />
+            <uipath:input name="folderPath" type="string" value="=bindings.b2Jh5ZD9K" />
+            <uipath:input name="_label" type="string" value="HospitalFinder" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_Latitude":{"type":"number"},"in_Longitude":{"type":"number"},"in_LocationAddress":{"type":"string"},"in_CaseId":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_Latitude":null,"in_Longitude":null,"in_LocationAddress":null,"in_CaseId":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error7" />
+          <uipath:output name="out_NearestHospital" type="string" source="=out_NearestHospital" var="outNearestHospital" />
+          <uipath:output name="out_HospitalEtaMinutes" type="integer" source="=out_HospitalEtaMinutes" var="outHospitalEtaMinutes" />
+          <uipath:output name="out_HospitalPhone" type="string" source="=out_HospitalPhone" var="outHospitalPhone" />
+          <uipath:output name="out_HospitalDistanceKm" type="number" source="=out_HospitalDistanceKm" var="outHospitalDistanceKm" />
+          <uipath:output name="out_HospitalsJson" type="string" source="=out_HospitalsJson" var="outHospitalsJson" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_par_hospital</bpmn:incoming>
+      <bpmn:outgoing>flow_hospital_to_join</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="task_notify_critical" name="Alert Family&#10;(WhatsApp)">
+      <bpmn:documentation>Robot sends WhatsApp messages to registered family contacts with severity and location</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bu5mvCF5p" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bcqyghjHc" />
+            <uipath:input name="_label" type="string" value="WhatsAppNotifier" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_CaseId":{"type":"string"},"in_ElderId":{"type":"string"},"in_Location":{"type":"string"},"in_SeverityScore":{"type":"integer"},"in_SeverityLabel":{"type":"string"},"in_NotificationType":{"type":"string"},"in_HospitalName":{"type":"string"},"in_CaregiverName":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_CaseId":null,"in_ElderId":null,"in_Location":null,"in_SeverityScore":null,"in_SeverityLabel":null,"in_NotificationType":null,"in_HospitalName":null,"in_CaregiverName":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error8" />
+          <uipath:output name="out_NotifiedCount" type="integer" source="=out_NotifiedCount" var="outNotifiedCount" />
+          <uipath:output name="out_Status" type="string" source="=out_Status" var="outStatus" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_par_notify_critical</bpmn:incoming>
+      <bpmn:outgoing>flow_notify_critical_to_join</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="task_assign_cg" name="Assign&#10;Caregiver">
+      <bpmn:documentation>AI agent matches nearest available caregiver based on location and severity</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bNtbTUuyx" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bF4wJnXUL" />
+            <uipath:input name="_label" type="string" value="CaregiverMatcher" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_LocationAddress":{"type":"string"},"in_Latitude":{"type":"number"},"in_Longitude":{"type":"number"},"in_SeverityScore":{"type":"number"},"in_EmergencyType":{"type":"string"},"in_CaseId":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_LocationAddress":null,"in_Latitude":null,"in_Longitude":null,"in_SeverityScore":null,"in_EmergencyType":null,"in_CaseId":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error9" />
+          <uipath:output name="out_CaregiverId" type="string" source="=out_CaregiverId" var="outCaregiverId" />
+          <uipath:output name="out_CaregiverName" type="string" source="=out_CaregiverName" var="outCaregiverName" />
+          <uipath:output name="out_CaregiverPhone" type="string" source="=out_CaregiverPhone" var="outCaregiverPhone" />
+          <uipath:output name="out_EtaMinutes" type="integer" source="=out_EtaMinutes" var="outEtaMinutes2" />
+          <uipath:output name="out_Assigned" type="boolean" source="=out_Assigned" var="outAssigned" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_par_assign_cg_critical</bpmn:incoming>
+      <bpmn:outgoing>flow_assign_cg_to_join</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:parallelGateway id="pgw_join_critical" name="Sync">
+      <bpmn:incoming>flow_hospital_to_join</bpmn:incoming>
+      <bpmn:incoming>flow_notify_critical_to_join</bpmn:incoming>
+      <bpmn:incoming>flow_assign_cg_to_join</bpmn:incoming>
+      <bpmn:outgoing>flow_join_to_human</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:userTask id="task_human_approve" name="APPROVE&#10;Ambulance Dispatch">
+      <bpmn:documentation>Medical coordinator reviews AI assessment and approves or rejects ambulance dispatch. Form fields: ambulance_approved (bool), responding_hospital (string), coordinator_notes (text)</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Actions.HITL" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bg9y1cR2h" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bys62kwKz" />
+            <uipath:input name="_label" type="string" value="App" />
+            <uipath:input name="taskTitle" type="string" value="=vars.ambulanceApproved" required="true" />
+            <uipath:input name="assignmentCriteria" type="string" value="SingleUser" />
+            <uipath:input name="recipient" type="json" />
+            <uipath:input name="customAssignees" type="string" />
+            <uipath:input name="priority" type="string" value="Medium" />
+            <uipath:input name="labels" type="string" />
+            <uipath:input name="actionCatalogName" type="string" />
+            <uipath:input name="enableActionableNotifications" type="boolean" value="false" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"out_SeverityLabel":{"type":"string"},"case_id":{"type":"string"},"in_ElderId":{"type":"string"},"out_summary":{"type":"string"},"in_EmergencyType":{"type":"string"},"out_NearestHospital":{"type":"string"},"out_Hospital_eta":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="HitlTaskArguments" type="json" target="bodyField"><![CDATA[{"out_SeverityLabel":null,"case_id":null,"in_ElderId":null,"out_summary":null,"in_EmergencyType":null,"out_NearestHospital":null,"out_Hospital_eta":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error2" />
+          <uipath:output name="ambulance_approved" type="string" source="=ambulance_approved" var="ambulanceApproved" />
+          <uipath:output name="coordinator_notes" type="string" source="=coordinator_notes" var="coordinatorNotes" />
+          <uipath:output name="Action" type="string" source="=Action" var="action2" options="[{&#34;value&#34;:&#34;SubmitDecision&#34;,&#34;label&#34;:&#34;SubmitDecision&#34;}]" />
+          <uipath:output name="hitlTask" type="jsonSchema" source="=hitlTask" var="hitlTask2" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_join_to_human</bpmn:incoming>
+      <bpmn:outgoing>flow_human_to_gw4</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="gw_approved" name="Ambulance&#10;Approved?" default="flow_approved_no">
+      <bpmn:incoming>flow_human_to_gw4</bpmn:incoming>
+      <bpmn:outgoing>flow_approved_yes</bpmn:outgoing>
+      <bpmn:outgoing>flow_approved_no</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="task_dispatch" name="DispatchAmbulance ">
+      <bpmn:documentation>Robot contacts ambulance service, confirms dispatch, and starts tracking ETA</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bRLzvRr6y" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bwvc8CWrN" />
+            <uipath:input name="_label" type="string" value="AmbulanceDispatch" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_CaseId":{"type":"string"},"in_Location":{"type":"string"},"in_Latitude":{"type":"number"},"in_Longitude":{"type":"number"},"in_HospitalName":{"type":"string"},"in_HospitalPhone":{"type":"string"},"in_SeverityScore":{"type":"integer"},"in_ApprovedBy":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_CaseId":null,"in_Location":null,"in_Latitude":null,"in_Longitude":null,"in_HospitalName":null,"in_HospitalPhone":null,"in_SeverityScore":null,"in_ApprovedBy":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error10" />
+          <uipath:output name="out_DispatchId" type="string" source="=out_DispatchId" var="outDispatchId" />
+          <uipath:output name="out_DispatchedAt" type="string" source="=out_DispatchedAt" var="outDispatchedAt" />
+          <uipath:output name="out_EtaMinutes" type="integer" source="=out_EtaMinutes" var="outEtaMinutes3" />
+          <uipath:output name="out_AmbulanceUnit" type="string" source="=out_AmbulanceUnit" var="outAmbulanceUnit" />
+          <uipath:output name="out_Dispatched" type="boolean" source="=out_Dispatched" var="outDispatched" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_approved_yes</bpmn:incoming>
+      <bpmn:outgoing>flow_dispatch_to_track</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="task_notify_dispatch" name="Notify All:&#10;Ambulance En Route">
+      <bpmn:documentation>Robot sends dispatch confirmation to family, elder, and caregiver via WhatsApp</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bTS8RCBSb" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bzLcCEO5j" />
+            <uipath:input name="_label" type="string" value="NotifyAllDispatch" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_CaseId":{"type":"string"},"in_ElderId":{"type":"string"},"in_Location":{"type":"string"},"in_SeverityScore":{"type":"integer"},"in_SeverityLabel":{"type":"string"},"in_HospitalName":{"type":"string"},"in_AmbulanceUnit":{"type":"string"},"in_DispatchId":{"type":"string"},"in_ApprovedBy":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_CaseId":null,"in_ElderId":null,"in_Location":null,"in_SeverityScore":null,"in_SeverityLabel":null,"in_HospitalName":null,"in_AmbulanceUnit":null,"in_DispatchId":null,"in_ApprovedBy":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error14" />
+          <uipath:output name="out_NotifiedCount" type="integer" source="=out_NotifiedCount" var="outNotifiedCount3" />
+          <uipath:output name="out_Status" type="string" source="=out_Status" var="outStatus3" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_dispatch_to_track</bpmn:incoming>
+      <bpmn:outgoing>flow_notify_dispatch_to_monitor</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="task_monitor_arrival" name="Track Ambulance&#10;Arrival">
+      <bpmn:documentation>Robot polls ambulance ETA and updates dashboard. Outputs: arrived_at, arrival_confirmed</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bExQCFYCv" />
+            <uipath:input name="folderPath" type="string" value="=bindings.b9upkPRLq" />
+            <uipath:input name="_label" type="string" value="AmbulanceTracker" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_CaseId":{"type":"string"},"in_ApiBaseUrl":{"type":"string"},"in_PollIntervalSecs":{"type":"integer"},"in_MaxWaitMinutes":{"type":"integer"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_CaseId":null,"in_ApiBaseUrl":null,"in_PollIntervalSecs":null,"in_MaxWaitMinutes":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error15" />
+          <uipath:output name="out_ArrivalConfirmed" type="boolean" source="=out_ArrivalConfirmed" var="outArrivalConfirmed" />
+          <uipath:output name="out_ArrivedAt" type="string" source="=out_ArrivedAt" var="outArrivedAt" />
+          <uipath:output name="out_AmbulanceUnit" type="string" source="=out_AmbulanceUnit" var="outAmbulanceUnit2" />
+          <uipath:output name="out_FinalStatus" type="string" source="=out_FinalStatus" var="outFinalStatus" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_notify_dispatch_to_monitor</bpmn:incoming>
+      <bpmn:outgoing>flow_monitor_to_resolve</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:parallelGateway id="pgw_split_standard" name="Standard&#10;Actions">
+      <bpmn:incoming>flow_sev_standard</bpmn:incoming>
+      <bpmn:incoming>flow_approved_no</bpmn:incoming>
+      <bpmn:outgoing>flow_std_assign</bpmn:outgoing>
+      <bpmn:outgoing>flow_std_notify</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:serviceTask id="task_assign_standard" name="Assign&#10;Caregiver">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bNtbTUuyx" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bF4wJnXUL" />
+            <uipath:input name="_label" type="string" value="CaregiverMatcher" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_LocationAddress":{"type":"string"},"in_Latitude":{"type":"number"},"in_Longitude":{"type":"number"},"in_SeverityScore":{"type":"number"},"in_EmergencyType":{"type":"string"},"in_CaseId":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_LocationAddress":null,"in_Latitude":null,"in_Longitude":null,"in_SeverityScore":null,"in_EmergencyType":null,"in_CaseId":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error11" />
+          <uipath:output name="out_CaregiverId" type="string" source="=out_CaregiverId" var="outCaregiverId2" />
+          <uipath:output name="out_CaregiverName" type="string" source="=out_CaregiverName" var="outCaregiverName2" />
+          <uipath:output name="out_CaregiverPhone" type="string" source="=out_CaregiverPhone" var="outCaregiverPhone2" />
+          <uipath:output name="out_EtaMinutes" type="integer" source="=out_EtaMinutes" var="outEtaMinutes4" />
+          <uipath:output name="out_Assigned" type="boolean" source="=out_Assigned" var="outAssigned2" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_std_assign</bpmn:incoming>
+      <bpmn:outgoing>flow_std_assign_join</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="task_notify_standard" name="Alert Family&#10;(WhatsApp)">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bu5mvCF5p" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bcqyghjHc" />
+            <uipath:input name="_label" type="string" value="WhatsAppNotifier" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_CaseId":{"type":"string"},"in_ElderId":{"type":"string"},"in_Location":{"type":"string"},"in_SeverityScore":{"type":"integer"},"in_SeverityLabel":{"type":"string"},"in_NotificationType":{"type":"string"},"in_HospitalName":{"type":"string"},"in_CaregiverName":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_CaseId":null,"in_ElderId":null,"in_Location":null,"in_SeverityScore":null,"in_SeverityLabel":null,"in_NotificationType":null,"in_HospitalName":null,"in_CaregiverName":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error13" />
+          <uipath:output name="out_NotifiedCount" type="integer" source="=out_NotifiedCount" var="outNotifiedCount2" />
+          <uipath:output name="out_Status" type="string" source="=out_Status" var="outStatus2" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_std_notify</bpmn:incoming>
+      <bpmn:outgoing>flow_std_notify_join</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:parallelGateway id="pgw_join_standard" name="Sync">
+      <bpmn:incoming>flow_std_assign_join</bpmn:incoming>
+      <bpmn:incoming>flow_std_notify_join</bpmn:incoming>
+      <bpmn:outgoing>flow_std_join_to_checkin</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:userTask id="task_caregiver_checkin" name="Caregiver&#10;Check-in">
+      <bpmn:documentation>Caregiver reports outcome on-site. Options: resolved, needs_escalation, hospital_required</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Actions.HITL" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bcVQKHZm2" />
+            <uipath:input name="folderPath" type="string" value="=bindings.biZmGZWf7" />
+            <uipath:input name="_label" type="string" value="CaregiverCheckin" />
+            <uipath:input name="taskTitle" type="string" value="=vars.caregiverOutcome" required="true" />
+            <uipath:input name="assignmentCriteria" type="string" value="SingleUser" />
+            <uipath:input name="recipient" type="json" />
+            <uipath:input name="customAssignees" type="string" />
+            <uipath:input name="priority" type="string" value="Medium" />
+            <uipath:input name="labels" type="string" />
+            <uipath:input name="actionCatalogName" type="string" />
+            <uipath:input name="enableActionableNotifications" type="boolean" value="false" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"case_id":{"type":"string"},"out_CaregiverName":{"type":"string"},"in_Location":{"type":"string"},"in_ElderId":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="HitlTaskArguments" type="json" target="bodyField"><![CDATA[{"case_id":null,"out_CaregiverName":null,"in_Location":null,"in_ElderId":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error3" />
+          <uipath:output name="caregiver_outcome" type="string" source="=caregiver_outcome" var="caregiverOutcome" />
+          <uipath:output name="heart_rate" type="number" source="=heart_rate" var="heartRate" />
+          <uipath:output name="blood_pressure" type="string" source="=blood_pressure" var="bloodPressure" />
+          <uipath:output name="consciousness" type="string" source="=consciousness" var="consciousness" />
+          <uipath:output name="injury_visible" type="string" source="=injury_visible" var="injuryVisible" />
+          <uipath:output name="vitals_notes" type="string" source="=vitals_notes" var="vitalsNotes" />
+          <uipath:output name="Action" type="string" source="=Action" var="action3" options="[{&#34;value&#34;:&#34;Completed&#34;,&#34;label&#34;:&#34;Completed&#34;}]" />
+          <uipath:output name="hitlTask" type="jsonSchema" source="=hitlTask" var="hitlTask3" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_std_join_to_checkin</bpmn:incoming>
+      <bpmn:outgoing>flow_checkin_to_gw5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="gw_outcome" name="Outcome?" default="flow_outcome_resolved">
+      <bpmn:incoming>flow_checkin_to_gw5</bpmn:incoming>
+      <bpmn:outgoing>flow_outcome_resolved</bpmn:outgoing>
+      <bpmn:outgoing>flow_outcome_escalate</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="task_review" name="Review Suspicious&#10;Alert">
+      <bpmn:documentation>Supervisor reviews flagged alert. Decision: genuine or false_alarm</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Actions.HITL" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bx5l2mBrL" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bGV5K38Ct" />
+            <uipath:input name="_label" type="string" value="Review Suspicious Alert" />
+            <uipath:input name="taskTitle" type="string" value="=vars.reviewerDecision" required="true" />
+            <uipath:input name="assignmentCriteria" type="string" value="SingleUser" />
+            <uipath:input name="recipient" type="json" />
+            <uipath:input name="customAssignees" type="string" />
+            <uipath:input name="priority" type="string" value="Medium" />
+            <uipath:input name="labels" type="string" />
+            <uipath:input name="actionCatalogName" type="string" />
+            <uipath:input name="enableActionableNotifications" type="boolean" value="false" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"case_id":{"type":"string"},"in_ElderId":{"type":"string"},"out_Source":{"type":"string"},"received_at":{"type":"string"},"in_RawText":{"type":"string"},"out_Reason":{"type":"string"},"fraud_confidence":{"type":"number"},"emergency_confidence":{"type":"number"},"out_SeverityScore":{"type":"number"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="HitlTaskArguments" type="json" target="bodyField"><![CDATA[{"case_id":null,"in_ElderId":null,"out_Source":null,"received_at":null,"in_RawText":null,"out_Reason":null,"fraud_confidence":null,"emergency_confidence":null,"out_SeverityScore":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error" />
+          <uipath:output name="reviewer_decision" type="string" source="=reviewer_decision" var="reviewerDecision" />
+          <uipath:output name="notes" type="string" source="=notes" var="notes" />
+          <uipath:output name="Action" type="string" source="=Action" var="action" options="[{&#34;value&#34;:&#34;SubmitReviewDecision&#34;,&#34;label&#34;:&#34;SubmitReviewDecision&#34;}]" />
+          <uipath:output name="hitlTask" type="jsonSchema" source="=hitlTask" var="hitlTask" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_gw2_to_review</bpmn:incoming>
+      <bpmn:outgoing>flow_review_to_gw6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="gw_review_decision" name="Decision?" default="flow_review_false">
+      <bpmn:incoming>flow_review_to_gw6</bpmn:incoming>
+      <bpmn:outgoing>flow_review_genuine</bpmn:outgoing>
+      <bpmn:outgoing>flow_review_false</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="task_close_case" name="Close Case &#38;&#10;Save Audit Trail">
+      <bpmn:documentation>Robot saves complete case audit log to database and marks Maestro case as resolved</bpmn:documentation>
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bFNXKR5bG" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bM5NGU5XS" />
+            <uipath:input name="_label" type="string" value="CaseCloser" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"in_CaseId":{"type":"string"},"in_Outcome":{"type":"string"},"in_DispatchId":{"type":"string"},"in_CaregiverId":{"type":"string"},"in_ResolutionNotes":{"type":"string"},"in_ApiBaseUrl":{"type":"string"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"in_CaseId":null,"in_Outcome":null,"in_DispatchId":null,"in_CaregiverId":null,"in_ResolutionNotes":null,"in_ApiBaseUrl":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error12" />
+          <uipath:output name="out_AuditLogUrl" type="string" source="=out_AuditLogUrl" var="outAuditLogUrl" />
+          <uipath:output name="out_ClosedAt" type="string" source="=out_ClosedAt" var="outClosedAt" />
+          <uipath:output name="out_CaseNumber" type="string" source="=out_CaseNumber" var="outCaseNumber" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flow_monitor_to_resolve</bpmn:incoming>
+      <bpmn:incoming>flow_outcome_resolved</bpmn:incoming>
+      <bpmn:outgoing>flow_close_to_end</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="end_resolved" name="Case&#10;Resolved ✅">
+      <bpmn:incoming>flow_close_to_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="end_dismissed" name="Alert&#10;Dismissed">
+      <bpmn:incoming>flow_gw1_to_dismiss</bpmn:incoming>
+      <bpmn:incoming>flow_review_false</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="end_escalated" name="Escalated to&#10;Critical Path">
+      <bpmn:incoming>flow_outcome_escalate</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="flow_start_to_detect" sourceRef="start_event" targetRef="task_detect" />
+    <bpmn:sequenceFlow id="flow_detect_to_gw1" sourceRef="task_detect" targetRef="gw_is_emergency" />
+    <bpmn:sequenceFlow id="flow_gw1_to_fraud" name="Yes — emergency" sourceRef="gw_is_emergency" targetRef="task_fraud">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=${is_emergency}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow_gw1_to_dismiss" name="No — dismiss" sourceRef="gw_is_emergency" targetRef="end_dismissed" />
+    <bpmn:sequenceFlow id="flow_fraud_to_gw2" sourceRef="task_fraud" targetRef="gw_suspicious" />
+    <bpmn:sequenceFlow id="flow_gw2_to_review" name="Suspicious" sourceRef="gw_suspicious" targetRef="task_review">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=${is_suspicious}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow_gw2_to_severity" name="Clear" sourceRef="gw_suspicious" targetRef="task_severity" />
+    <bpmn:sequenceFlow id="flow_severity_to_gw3" sourceRef="task_severity" targetRef="gw_severity" />
+    <bpmn:sequenceFlow id="flow_sev_critical" name="Severity &#62;= 4" sourceRef="gw_severity" targetRef="pgw_split_critical">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=${severity_score &gt;= 4}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow_sev_standard" name="Severity less than 4" sourceRef="gw_severity" targetRef="pgw_split_standard" />
+    <bpmn:sequenceFlow id="flow_par_hospital" sourceRef="pgw_split_critical" targetRef="task_hospital" />
+    <bpmn:sequenceFlow id="flow_par_notify_critical" sourceRef="pgw_split_critical" targetRef="task_notify_critical" />
+    <bpmn:sequenceFlow id="flow_par_assign_cg_critical" sourceRef="pgw_split_critical" targetRef="task_assign_cg" />
+    <bpmn:sequenceFlow id="flow_hospital_to_join" sourceRef="task_hospital" targetRef="pgw_join_critical" />
+    <bpmn:sequenceFlow id="flow_notify_critical_to_join" sourceRef="task_notify_critical" targetRef="pgw_join_critical" />
+    <bpmn:sequenceFlow id="flow_assign_cg_to_join" sourceRef="task_assign_cg" targetRef="pgw_join_critical" />
+    <bpmn:sequenceFlow id="flow_join_to_human" sourceRef="pgw_join_critical" targetRef="task_human_approve" />
+    <bpmn:sequenceFlow id="flow_human_to_gw4" sourceRef="task_human_approve" targetRef="gw_approved" />
+    <bpmn:sequenceFlow id="flow_approved_yes" name="Approved" sourceRef="gw_approved" targetRef="task_dispatch">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=${ambulance_approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow_approved_no" name="Declined" sourceRef="gw_approved" targetRef="pgw_split_standard" />
+    <bpmn:sequenceFlow id="flow_dispatch_to_track" sourceRef="task_dispatch" targetRef="task_notify_dispatch" />
+    <bpmn:sequenceFlow id="flow_notify_dispatch_to_monitor" sourceRef="task_notify_dispatch" targetRef="task_monitor_arrival" />
+    <bpmn:sequenceFlow id="flow_monitor_to_resolve" sourceRef="task_monitor_arrival" targetRef="task_close_case" />
+    <bpmn:sequenceFlow id="flow_std_assign" sourceRef="pgw_split_standard" targetRef="task_assign_standard" />
+    <bpmn:sequenceFlow id="flow_std_notify" sourceRef="pgw_split_standard" targetRef="task_notify_standard" />
+    <bpmn:sequenceFlow id="flow_std_assign_join" sourceRef="task_assign_standard" targetRef="pgw_join_standard" />
+    <bpmn:sequenceFlow id="flow_std_notify_join" sourceRef="task_notify_standard" targetRef="pgw_join_standard" />
+    <bpmn:sequenceFlow id="flow_std_join_to_checkin" sourceRef="pgw_join_standard" targetRef="task_caregiver_checkin" />
+    <bpmn:sequenceFlow id="flow_checkin_to_gw5" sourceRef="task_caregiver_checkin" targetRef="gw_outcome" />
+    <bpmn:sequenceFlow id="flow_outcome_resolved" name="Resolved" sourceRef="gw_outcome" targetRef="task_close_case" />
+    <bpmn:sequenceFlow id="flow_outcome_escalate" name="Needs escalation" sourceRef="gw_outcome" targetRef="end_escalated">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=${caregiver_outcome == "needs_escalation"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow_review_to_gw6" sourceRef="task_review" targetRef="gw_review_decision" />
+    <bpmn:sequenceFlow id="flow_review_genuine" name="Genuine" sourceRef="gw_review_decision" targetRef="task_severity">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=${reviewer_decision == "genuine"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flow_review_false" name="False alarm" sourceRef="gw_review_decision" targetRef="end_dismissed" />
+    <bpmn:sequenceFlow id="flow_close_to_end" sourceRef="task_close_case" targetRef="end_resolved" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="diagram_eldercare">
+    <bpmndi:BPMNPlane id="plane_eldercare" bpmnElement="ElderCareEmergencyResponse">
+      <bpmndi:BPMNShape id="S_start_event" bpmnElement="start_event">
+        <dc:Bounds x="252" y="377.3333333333333" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="252" y="422.3333333333333" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_detect" bpmnElement="task_detect">
+        <dc:Bounds x="342" y="357.3333333333333" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="342" y="442.3333333333333" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_gw_is_emergency" bpmnElement="gw_is_emergency">
+        <dc:Bounds x="512" y="377.3333333333333" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="512" y="422.3333333333333" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_fraud" bpmnElement="task_fraud">
+        <dc:Bounds x="765" y="364" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="765" y="449" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_gw_suspicious" bpmnElement="gw_suspicious">
+        <dc:Bounds x="935" y="384" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="935" y="429" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_severity" bpmnElement="task_severity">
+        <dc:Bounds x="1542" y="357.3333333333333" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1542" y="442.3333333333333" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_gw_severity" bpmnElement="gw_severity">
+        <dc:Bounds x="1712" y="377.3333333333333" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1712" y="422.3333333333333" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_pgw_split_critical" bpmnElement="pgw_split_critical">
+        <dc:Bounds x="1951" y="384" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1951" y="429" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_hospital" bpmnElement="task_hospital">
+        <dc:Bounds x="2041" y="494" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2041" y="579" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_notify_critical" bpmnElement="task_notify_critical">
+        <dc:Bounds x="2041" y="364" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2041" y="449" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_assign_cg" bpmnElement="task_assign_cg">
+        <dc:Bounds x="2041" y="234" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2041" y="319" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_pgw_join_critical" bpmnElement="pgw_join_critical">
+        <dc:Bounds x="2238" y="504" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2238" y="549" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_human_approve" bpmnElement="task_human_approve">
+        <dc:Bounds x="2409" y="484" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2409" y="569" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_gw_approved" bpmnElement="gw_approved">
+        <dc:Bounds x="2579" y="504" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2579" y="549" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_dispatch" bpmnElement="task_dispatch">
+        <dc:Bounds x="2783" y="490.66666666666663" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2783" y="575.6666666666666" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_notify_dispatch" bpmnElement="task_notify_dispatch">
+        <dc:Bounds x="2953" y="490.66666666666663" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2953" y="575.6666666666666" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_monitor_arrival" bpmnElement="task_monitor_arrival">
+        <dc:Bounds x="3213" y="490.66666666666663" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3213" y="575.6666666666666" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_pgw_split_standard" bpmnElement="pgw_split_standard">
+        <dc:Bounds x="2823" y="374" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2823" y="419" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_assign_standard" bpmnElement="task_assign_standard">
+        <dc:Bounds x="2953" y="360.66666666666663" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2953" y="445.66666666666663" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_notify_standard" bpmnElement="task_notify_standard">
+        <dc:Bounds x="2953" y="230.66666666666666" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2953" y="315.66666666666663" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_pgw_join_standard" bpmnElement="pgw_join_standard">
+        <dc:Bounds x="3123" y="374" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3123" y="419" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_caregiver_checkin" bpmnElement="task_caregiver_checkin">
+        <dc:Bounds x="3213" y="354" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3213" y="439" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_gw_outcome" bpmnElement="gw_outcome">
+        <dc:Bounds x="3383" y="374" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3383" y="419" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_review" bpmnElement="task_review">
+        <dc:Bounds x="1167" y="280.66666666666663" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1167" y="365.66666666666663" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_gw_review_decision" bpmnElement="gw_review_decision">
+        <dc:Bounds x="1317" y="300.66666666666663" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1317" y="345.66666666666663" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_task_close_case" bpmnElement="task_close_case">
+        <dc:Bounds x="3643" y="477.3333333333333" width="120" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3643" y="562.3333333333333" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_end_resolved" bpmnElement="end_resolved">
+        <dc:Bounds x="3813" y="497.3333333333333" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3813" y="542.3333333333333" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_end_dismissed" bpmnElement="end_dismissed">
+        <dc:Bounds x="1542" y="258.66666666666663" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1542" y="303.66666666666663" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_end_escalated" bpmnElement="end_escalated">
+        <dc:Bounds x="3643" y="338.66666666666663" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3643" y="383.66666666666663" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_start_to_detect" bpmnElement="flow_start_to_detect">
+        <di:waypoint x="292" y="397.3333333333333" />
+        <di:waypoint x="342" y="397.3333333333333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_detect_to_gw1" bpmnElement="flow_detect_to_gw1">
+        <di:waypoint x="462" y="397.3333333333333" />
+        <di:waypoint x="512" y="397.3333333333333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_gw1_to_fraud" bpmnElement="flow_gw1_to_fraud">
+        <di:waypoint x="552" y="397.3333333333333" />
+        <di:waypoint x="658.5" y="397.3333333333333" />
+        <di:waypoint x="658.5" y="404" />
+        <di:waypoint x="765" y="404" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_gw1_to_dismiss" bpmnElement="flow_gw1_to_dismiss">
+        <di:waypoint x="552" y="397.3333333333333" />
+        <di:waypoint x="1047" y="397.3333333333333" />
+        <di:waypoint x="1047" y="278.66666666666663" />
+        <di:waypoint x="1542" y="278.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_fraud_to_gw2" bpmnElement="flow_fraud_to_gw2">
+        <di:waypoint x="885" y="404" />
+        <di:waypoint x="935" y="404" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_gw2_to_review" bpmnElement="flow_gw2_to_review">
+        <di:waypoint x="975" y="404" />
+        <di:waypoint x="1071" y="404" />
+        <di:waypoint x="1071" y="320.66666666666663" />
+        <di:waypoint x="1167" y="320.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_gw2_to_severity" bpmnElement="flow_gw2_to_severity">
+        <di:waypoint x="975" y="404" />
+        <di:waypoint x="1258.5" y="404" />
+        <di:waypoint x="1258.5" y="397.3333333333333" />
+        <di:waypoint x="1542" y="397.3333333333333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_severity_to_gw3" bpmnElement="flow_severity_to_gw3">
+        <di:waypoint x="1662" y="397.3333333333333" />
+        <di:waypoint x="1712" y="397.3333333333333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_sev_critical" bpmnElement="flow_sev_critical">
+        <di:waypoint x="1752" y="397.3333333333333" />
+        <di:waypoint x="1851.5" y="397.3333333333333" />
+        <di:waypoint x="1851.5" y="404" />
+        <di:waypoint x="1951" y="404" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_sev_standard" bpmnElement="flow_sev_standard">
+        <di:waypoint x="1752" y="397.3333333333333" />
+        <di:waypoint x="2287.5" y="397.3333333333333" />
+        <di:waypoint x="2287.5" y="394" />
+        <di:waypoint x="2823" y="394" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_par_hospital" bpmnElement="flow_par_hospital">
+        <di:waypoint x="1991" y="404" />
+        <di:waypoint x="2016" y="404" />
+        <di:waypoint x="2016" y="534" />
+        <di:waypoint x="2041" y="534" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_par_notify_critical" bpmnElement="flow_par_notify_critical">
+        <di:waypoint x="1991" y="404" />
+        <di:waypoint x="2041" y="404" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_par_assign_cg_critical" bpmnElement="flow_par_assign_cg_critical">
+        <di:waypoint x="1991" y="404" />
+        <di:waypoint x="2016" y="404" />
+        <di:waypoint x="2016" y="274" />
+        <di:waypoint x="2041" y="274" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_hospital_to_join" bpmnElement="flow_hospital_to_join">
+        <di:waypoint x="2161" y="534" />
+        <di:waypoint x="2199.5" y="534" />
+        <di:waypoint x="2199.5" y="524" />
+        <di:waypoint x="2238" y="524" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_notify_critical_to_join" bpmnElement="flow_notify_critical_to_join">
+        <di:waypoint x="2161" y="404" />
+        <di:waypoint x="2199.5" y="404" />
+        <di:waypoint x="2199.5" y="524" />
+        <di:waypoint x="2238" y="524" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_assign_cg_to_join" bpmnElement="flow_assign_cg_to_join">
+        <di:waypoint x="2161" y="274" />
+        <di:waypoint x="2199.5" y="274" />
+        <di:waypoint x="2199.5" y="524" />
+        <di:waypoint x="2238" y="524" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_join_to_human" bpmnElement="flow_join_to_human">
+        <di:waypoint x="2278" y="524" />
+        <di:waypoint x="2409" y="524" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_human_to_gw4" bpmnElement="flow_human_to_gw4">
+        <di:waypoint x="2529" y="524" />
+        <di:waypoint x="2579" y="524" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_approved_yes" bpmnElement="flow_approved_yes">
+        <di:waypoint x="2619" y="524" />
+        <di:waypoint x="2701" y="524" />
+        <di:waypoint x="2701" y="530.6666666666666" />
+        <di:waypoint x="2783" y="530.6666666666666" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_approved_no" bpmnElement="flow_approved_no">
+        <di:waypoint x="2619" y="524" />
+        <di:waypoint x="2721" y="524" />
+        <di:waypoint x="2721" y="394" />
+        <di:waypoint x="2823" y="394" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_dispatch_to_track" bpmnElement="flow_dispatch_to_track">
+        <di:waypoint x="2903" y="530.6666666666666" />
+        <di:waypoint x="2953" y="530.6666666666666" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_notify_dispatch_to_monitor" bpmnElement="flow_notify_dispatch_to_monitor">
+        <di:waypoint x="3073" y="530.6666666666666" />
+        <di:waypoint x="3213" y="530.6666666666666" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_monitor_to_resolve" bpmnElement="flow_monitor_to_resolve">
+        <di:waypoint x="3333" y="530.6666666666666" />
+        <di:waypoint x="3488" y="530.6666666666666" />
+        <di:waypoint x="3488" y="517.3333333333333" />
+        <di:waypoint x="3643" y="517.3333333333333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_std_assign" bpmnElement="flow_std_assign">
+        <di:waypoint x="2863" y="394" />
+        <di:waypoint x="2908" y="394" />
+        <di:waypoint x="2908" y="400.66666666666663" />
+        <di:waypoint x="2953" y="400.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_std_notify" bpmnElement="flow_std_notify">
+        <di:waypoint x="2863" y="394" />
+        <di:waypoint x="2908" y="394" />
+        <di:waypoint x="2908" y="270.66666666666663" />
+        <di:waypoint x="2953" y="270.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_std_assign_join" bpmnElement="flow_std_assign_join">
+        <di:waypoint x="3073" y="400.66666666666663" />
+        <di:waypoint x="3098" y="400.66666666666663" />
+        <di:waypoint x="3098" y="394" />
+        <di:waypoint x="3123" y="394" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_std_notify_join" bpmnElement="flow_std_notify_join">
+        <di:waypoint x="3073" y="270.66666666666663" />
+        <di:waypoint x="3098" y="270.66666666666663" />
+        <di:waypoint x="3098" y="394" />
+        <di:waypoint x="3123" y="394" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_std_join_to_checkin" bpmnElement="flow_std_join_to_checkin">
+        <di:waypoint x="3163" y="394" />
+        <di:waypoint x="3213" y="394" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_checkin_to_gw5" bpmnElement="flow_checkin_to_gw5">
+        <di:waypoint x="3333" y="394" />
+        <di:waypoint x="3383" y="394" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_outcome_resolved" bpmnElement="flow_outcome_resolved">
+        <di:waypoint x="3423" y="394" />
+        <di:waypoint x="3533" y="394" />
+        <di:waypoint x="3533" y="517.3333333333333" />
+        <di:waypoint x="3643" y="517.3333333333333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_outcome_escalate" bpmnElement="flow_outcome_escalate">
+        <di:waypoint x="3423" y="394" />
+        <di:waypoint x="3533" y="394" />
+        <di:waypoint x="3533" y="358.66666666666663" />
+        <di:waypoint x="3643" y="358.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_review_to_gw6" bpmnElement="flow_review_to_gw6">
+        <di:waypoint x="1267" y="320.66666666666663" />
+        <di:waypoint x="1317" y="320.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_review_genuine" bpmnElement="flow_review_genuine">
+        <di:waypoint x="1357" y="320.66666666666663" />
+        <di:waypoint x="1449.5" y="320.66666666666663" />
+        <di:waypoint x="1449.5" y="397.3333333333333" />
+        <di:waypoint x="1542" y="397.3333333333333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_review_false" bpmnElement="flow_review_false">
+        <di:waypoint x="1357" y="320.66666666666663" />
+        <di:waypoint x="1449.5" y="320.66666666666663" />
+        <di:waypoint x="1449.5" y="278.66666666666663" />
+        <di:waypoint x="1542" y="278.66666666666663" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow_close_to_end" bpmnElement="flow_close_to_end">
+        <di:waypoint x="3763" y="517.3333333333333" />
+        <di:waypoint x="3813" y="517.3333333333333" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

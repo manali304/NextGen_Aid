@@ -1,0 +1,30 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Review Suspicious Alert",
+    "kind": "appVersion",
+    "apiVersion": "apps.uipath.com/v2",
+    "projectKey": "2338aa93-28dc-4586-bbde-394d1fe432a2",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "Review Suspicious Alert",
+      "description": null,
+      "publishNote": null,
+      "version": null,
+      "projectId": null,
+      "isAppPublic": false,
+      "packageFile": null,
+      "packageKey": null
+    },
+    "locks": [],
+    "key": "e73915c7-c833-40b5-ab39-29df033895a2"
+  }
+}

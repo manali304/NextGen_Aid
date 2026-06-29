@@ -1,0 +1,33 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "AmbulanceDispatch",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [
+      {
+        "name": "AmbulanceDispatch.1.0.3.nupkg",
+        "kind": "Package",
+        "version": "1.0.3",
+        "url": "https://staging.uipath.com/07bb327c-38bf-4bde-9e6d-bc8fe4cf59b6/3b34a582-b9f4-4b76-980d-2768b2e9cd1d/orchestrator_/odata/Processes/UiPath.Server.Configuration.OData.DownloadPackage(key=\u0027AmbulanceDispatch:1.0.3\u0027)?feedId=b3472f53-45ce-43a8-974f-92a705462eb8",
+        "key": "AmbulanceDispatch_1.0.3"
+      }
+    ],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": "AmbulanceDispatch.1.0.3.nupkg",
+      "fileReference": "AmbulanceDispatch_1.0.3",
+      "name": "AmbulanceDispatch",
+      "description": null
+    },
+    "locks": [],
+    "key": "AmbulanceDispatch:1.0.3"
+  }
+}

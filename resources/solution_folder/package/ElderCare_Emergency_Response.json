@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ElderCare Emergency Response",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "799a4baa-2f8f-40fd-87ed-b1f50f65a539",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "ElderCare Emergency Response",
+      "description": null
+    },
+    "locks": [],
+    "key": "0f2bb2da-8a4b-4852-9080-cf1f704bc6ce"
+  }
+}

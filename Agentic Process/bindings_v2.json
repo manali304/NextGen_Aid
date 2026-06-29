@@ -1,0 +1,239 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "resource": "app",
+      "key": "CaregiverCheckin",
+      "id": "appCaregiverCheckin",
+      "value": {
+        "name": {
+          "defaultValue": "CaregiverCheckin",
+          "isExpression": false,
+          "displayName": "App name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Caregiver\nCheck-in",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "app",
+      "key": "Review Suspicious Alert",
+      "id": "appReview Suspicious Alert",
+      "value": {
+        "name": {
+          "defaultValue": "Review Suspicious Alert",
+          "isExpression": false,
+          "displayName": "App name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Review Suspicious\nAlert",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "app",
+      "key": "Approve Ambulance Dispatch",
+      "id": "appApprove Ambulance Dispatch",
+      "value": {
+        "name": {
+          "defaultValue": "Approve Ambulance Dispatch",
+          "isExpression": false,
+          "displayName": "App name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "APPROVE\nAmbulance Dispatch",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "EmergencyDetector",
+      "id": "processEmergencyDetector",
+      "value": {
+        "name": {
+          "defaultValue": "EmergencyDetector",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "AI Emergency\nDetection",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "FraudGuard",
+      "id": "processFraudGuard",
+      "value": {
+        "name": {
+          "defaultValue": "FraudGuard",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Fraud Guard\nAI Agent",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "SeverityScorer",
+      "id": "processSeverityScorer",
+      "value": {
+        "name": {
+          "defaultValue": "SeverityScorer",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Severity Scorer\nAI Agent",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "HospitalFinder",
+      "id": "processHospitalFinder",
+      "value": {
+        "name": {
+          "defaultValue": "HospitalFinder",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Find Nearest\nHospital (ER)",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "WhatsAppNotifier",
+      "id": "processWhatsAppNotifier",
+      "value": {
+        "name": {
+          "defaultValue": "WhatsAppNotifier",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Alert Family\n(WhatsApp)",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "CaregiverMatcher",
+      "id": "processCaregiverMatcher",
+      "value": {
+        "name": {
+          "defaultValue": "CaregiverMatcher",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Assign\nCaregiver",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "AmbulanceDispatch",
+      "id": "processAmbulanceDispatch",
+      "value": {
+        "name": {
+          "defaultValue": "AmbulanceDispatch",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "DispatchAmbulance ",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "CaseCloser",
+      "id": "processCaseCloser",
+      "value": {
+        "name": {
+          "defaultValue": "CaseCloser",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Close Case &\nSave Audit Trail",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "NotifyAllDispatch",
+      "id": "processNotifyAllDispatch",
+      "value": {
+        "name": {
+          "defaultValue": "NotifyAllDispatch",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Notify All:\nAmbulance En Route",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "AmbulanceTracker",
+      "id": "processAmbulanceTracker",
+      "value": {
+        "name": {
+          "defaultValue": "AmbulanceTracker",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Track Ambulance\nArrival",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    }
+  ]
+}

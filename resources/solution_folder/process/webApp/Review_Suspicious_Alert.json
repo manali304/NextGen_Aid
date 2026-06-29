@@ -1,0 +1,63 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Review Suspicious Alert",
+    "kind": "process",
+    "type": "webApp",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "2338aa93-28dc-4586-bbde-394d1fe432a2",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "Review Suspicious Alert",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "entryPointUniqueId": null,
+      "inputArgumentsSchema": null,
+      "outputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": null,
+      "outputArgumentsSchemaV2": null,
+      "type": "WebApp",
+      "name": "Review Suspicious Alert",
+      "description": null,
+      "package": {
+        "key": "3ff293ab-7681-45a0-8fc0-3be865816d55"
+      },
+      "packageName": "NextGen.Aid.webApp.Review.Suspicious.Alert",
+      "packageVersion": null,
+      "entryPointName": null,
+      "inputArguments": "{}",
+      "jobPriority": "Medium",
+      "hiddenForAttendedUser": true,
+      "alwaysRunning": true,
+      "autoStartProcess": false,
+      "jobRecording": "Disabled",
+      "targetFrameworkValue": "Portable",
+      "duration": 40,
+      "frequency": 500,
+      "quality": 100,
+      "remoteControlAccess": "None",
+      "robotSize": "Automatic",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": null,
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "68927c76-493c-4fd4-ba86-0b9e8d66e60d"
+  }
+}

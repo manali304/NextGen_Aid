@@ -1,0 +1,63 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "CaregiverCheckin",
+    "kind": "process",
+    "type": "webApp",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "c855a593-af92-4a8e-a06c-c37aff92b547",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "CaregiverCheckin",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "entryPointUniqueId": null,
+      "inputArgumentsSchema": null,
+      "outputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": null,
+      "outputArgumentsSchemaV2": null,
+      "type": "WebApp",
+      "name": "CaregiverCheckin",
+      "description": null,
+      "package": {
+        "key": "a9c3bf0c-c4bf-474f-bb76-f54b8f50c7d7"
+      },
+      "packageName": "NextGen.Aid.webApp.CaregiverCheckin",
+      "packageVersion": null,
+      "entryPointName": null,
+      "inputArguments": "{}",
+      "jobPriority": "Medium",
+      "hiddenForAttendedUser": true,
+      "alwaysRunning": true,
+      "autoStartProcess": false,
+      "jobRecording": "Disabled",
+      "targetFrameworkValue": "Portable",
+      "duration": 40,
+      "frequency": 500,
+      "quality": 100,
+      "remoteControlAccess": "None",
+      "robotSize": "Automatic",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": null,
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "05320d32-c20e-4192-8aae-610eea2979d7"
+  }
+}

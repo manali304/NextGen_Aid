@@ -1,0 +1,45 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Approve Ambulance Dispatch",
+    "kind": "app",
+    "type": "workflow Action",
+    "apiVersion": "apps.uipath.com/v1",
+    "projectKey": "7624bc13-bfdb-4896-9396-096f07a2c637",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "Approve Ambulance Dispatch",
+        "kind": "appVersion"
+      },
+      {
+        "name": "Approve Ambulance Dispatch",
+        "kind": "process"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "Approve Ambulance Dispatch",
+      "description": null,
+      "type": "workflow Action",
+      "version": null,
+      "appSystemName": null,
+      "appVersionRef": {
+        "key": "e4346f78-afdc-4da1-8701-c23b8d7d801a"
+      },
+      "codeBehindProcess": {
+        "key": "bcbbab61-97b0-4963-b825-3366f7425e38"
+      },
+      "actionSchema": null,
+      "manualActivationActions": null
+    },
+    "locks": [],
+    "key": "ac9483ca-2fae-4d9d-aa32-f457dc764597"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Approve Ambulance Dispatch",
+    "kind": "appVersion",
+    "apiVersion": "apps.uipath.com/v2",
+    "projectKey": "7624bc13-bfdb-4896-9396-096f07a2c637",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "Approve Ambulance Dispatch",
+      "description": null,
+      "publishNote": null,
+      "version": null,
+      "projectId": null,
+      "isAppPublic": false,
+      "packageFile": null,
+      "packageKey": null
+    },
+    "locks": [],
+    "key": "e4346f78-afdc-4da1-8701-c23b8d7d801a"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ElderCare Emergency Response",
+    "kind": "process",
+    "type": "caseManagement",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "799a4baa-2f8f-40fd-87ed-b1f50f65a539",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "ElderCare Emergency Response",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "entryPointUniqueId": null,
+      "inputArgumentsSchema": null,
+      "outputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": null,
+      "outputArgumentsSchemaV2": null,
+      "type": "CaseManagement",
+      "name": "ElderCare Emergency Response",
+      "description": null,
+      "package": {
+        "key": "0f2bb2da-8a4b-4852-9080-cf1f704bc6ce"
+      },
+      "packageName": "NextGen.Aid.caseManagement.ElderCare.Emergency.Response",
+      "packageVersion": null,
+      "entryPointName": null,
+      "inputArguments": "{}",
+      "hiddenForAttendedUser": false,
+      "alwaysRunning": false,
+      "autoStartProcess": false,
+      "targetFrameworkValue": "Portable",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": null,
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "776c0262-ee3f-4539-976a-6fa00271fe04"
+  }
+}

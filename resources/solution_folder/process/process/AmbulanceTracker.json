@@ -1,0 +1,62 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "AmbulanceTracker",
+    "kind": "process",
+    "type": "process",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "AmbulanceTracker",
+        "kind": "Package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "type": "Process",
+      "jobPriority": "Medium",
+      "jobRecording": "Disabled",
+      "duration": 40,
+      "frequency": 500,
+      "quality": 100,
+      "remoteControlAccess": "None",
+      "name": "AmbulanceTracker",
+      "description": "Blank Process",
+      "package": {
+        "name": "AmbulanceTracker",
+        "key": "AmbulanceTracker:1.0.2"
+      },
+      "packageName": "AmbulanceTracker",
+      "packageVersion": "1.0.2",
+      "entryPointUniqueId": "417017d5-c501-4173-9ba3-5864c4e5c461",
+      "entryPointName": "Main.xaml",
+      "inputArguments": null,
+      "inputArgumentsSchema": null,
+      "outputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": "{\n  \u0022type\u0022: \u0022object\u0022,\n  \u0022properties\u0022: {\n    \u0022in_CaseId\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022in_ApiBaseUrl\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022in_PollIntervalSecs\u0022: {\n      \u0022type\u0022: \u0022integer\u0022,\n      \u0022minimum\u0022: -2147483648,\n      \u0022maximum\u0022: 2147483647\n    },\n    \u0022in_MaxWaitMinutes\u0022: {\n      \u0022type\u0022: \u0022integer\u0022,\n      \u0022minimum\u0022: -2147483648,\n      \u0022maximum\u0022: 2147483647\n    }\n  },\n  \u0022required\u0022: []\n}",
+      "outputArgumentsSchemaV2": "{\n  \u0022type\u0022: \u0022object\u0022,\n  \u0022properties\u0022: {\n    \u0022out_ArrivalConfirmed\u0022: {\n      \u0022type\u0022: \u0022boolean\u0022\n    },\n    \u0022out_ArrivedAt\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022out_AmbulanceUnit\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022out_FinalStatus\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    }\n  }\n}",
+      "hiddenForAttendedUser": false,
+      "alwaysRunning": false,
+      "autoStartProcess": false,
+      "targetFrameworkValue": "Windows",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": "[{\u0022UniqueId\u0022:\u0022417017d5-c501-4173-9ba3-5864c4e5c461\u0022,\u0022Path\u0022:\u0022Main.xaml\u0022,\u0022DisplayName\u0022:null,\u0022InputArguments\u0022:\u0022{\\n  \\\u0022type\\\u0022: \\\u0022object\\\u0022,\\n  \\\u0022properties\\\u0022: {\\n    \\\u0022in_CaseId\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022in_ApiBaseUrl\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022in_PollIntervalSecs\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022integer\\\u0022,\\n      \\\u0022minimum\\\u0022: -2147483648,\\n      \\\u0022maximum\\\u0022: 2147483647\\n    },\\n    \\\u0022in_MaxWaitMinutes\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022integer\\\u0022,\\n      \\\u0022minimum\\\u0022: -2147483648,\\n      \\\u0022maximum\\\u0022: 2147483647\\n    }\\n  },\\n  \\\u0022required\\\u0022: []\\n}\u0022,\u0022OutputArguments\u0022:\u0022{\\n  \\\u0022type\\\u0022: \\\u0022object\\\u0022,\\n  \\\u0022properties\\\u0022: {\\n    \\\u0022out_ArrivalConfirmed\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022boolean\\\u0022\\n    },\\n    \\\u0022out_ArrivedAt\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022out_AmbulanceUnit\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022out_FinalStatus\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    }\\n  }\\n}\u0022,\u0022Type\u0022:1,\u0022TargetRuntime\u0022:null,\u0022ContentRoot\u0022:null,\u0022DataVariation\u0022:null,\u0022Id\u0022:13835956}]",
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "544a73a8-7c4e-47f4-bcf8-f421c1396cc0"
+  }
+}

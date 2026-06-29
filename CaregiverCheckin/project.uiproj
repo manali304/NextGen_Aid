@@ -1,0 +1,10 @@
+{
+  "ProjectType": "WebApp",
+  "WebAppSettings": {
+    "AppId": "IDbe35a4c263c143c4a22bfebb31e210b9",
+    "IsCoreProject": true
+  },
+  "Name": "CaregiverCheckin",
+  "Description": null,
+  "MainFile": "Main.xaml"
+}

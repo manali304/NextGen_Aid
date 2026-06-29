@@ -1,0 +1,72 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/caseplan.json.bpmn#trigger_1",
+      "uniqueId": "c67ca933-10b4-4339-8993-9e0ffeb047b0",
+      "type": "CaseManagement",
+      "input": {
+        "type": "object",
+        "properties": {
+          "elder_id": {
+            "type": "string",
+            "title": "elder_id"
+          },
+          "raw_text": {
+            "type": "string",
+            "title": "raw_text"
+          },
+          "location": {
+            "type": "string",
+            "title": "location"
+          },
+          "severity": {
+            "type": "number",
+            "format": "double",
+            "title": "severity"
+          },
+          "emergencyType": {
+            "type": "string",
+            "title": "emergencyType"
+          },
+          "emergencyData": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "raw_text": {
+                "type": "string"
+              },
+              "location": {
+                "type": "string"
+              },
+              "elder_id": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "integer"
+              },
+              "lon": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "required": [
+          "elder_id",
+          "raw_text",
+          "location",
+          "severity",
+          "emergencyType"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {}
+      },
+      "displayName": "Trigger"
+    }
+  ]
+}

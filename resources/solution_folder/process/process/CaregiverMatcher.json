@@ -1,0 +1,62 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "CaregiverMatcher",
+    "kind": "process",
+    "type": "process",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "CaregiverMatcher",
+        "kind": "Package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "type": "Process",
+      "jobPriority": "Medium",
+      "jobRecording": "Disabled",
+      "duration": 40,
+      "frequency": 500,
+      "quality": 100,
+      "remoteControlAccess": "None",
+      "name": "CaregiverMatcher",
+      "description": "Blank Process",
+      "package": {
+        "name": "CaregiverMatcher",
+        "key": "CaregiverMatcher:1.0.3"
+      },
+      "packageName": "CaregiverMatcher",
+      "packageVersion": "1.0.3",
+      "entryPointUniqueId": "9506b84a-2b52-4773-aa8f-953671a26555",
+      "entryPointName": "Main.xaml",
+      "inputArguments": null,
+      "inputArgumentsSchema": null,
+      "outputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": "{\n  \u0022type\u0022: \u0022object\u0022,\n  \u0022properties\u0022: {\n    \u0022in_LocationAddress\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022in_Latitude\u0022: {\n      \u0022type\u0022: \u0022number\u0022,\n      \u0022minimum\u0022: -1.7976931348623157E\u002B308,\n      \u0022maximum\u0022: 1.7976931348623157E\u002B308\n    },\n    \u0022in_Longitude\u0022: {\n      \u0022type\u0022: \u0022number\u0022,\n      \u0022minimum\u0022: -1.7976931348623157E\u002B308,\n      \u0022maximum\u0022: 1.7976931348623157E\u002B308\n    },\n    \u0022in_SeverityScore\u0022: {\n      \u0022type\u0022: \u0022number\u0022,\n      \u0022minimum\u0022: -1.7976931348623157E\u002B308,\n      \u0022maximum\u0022: 1.7976931348623157E\u002B308\n    },\n    \u0022in_EmergencyType\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022in_CaseId\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022in_ApiBaseUrl\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    }\n  },\n  \u0022required\u0022: []\n}",
+      "outputArgumentsSchemaV2": "{\n  \u0022type\u0022: \u0022object\u0022,\n  \u0022properties\u0022: {\n    \u0022out_CaregiverId\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022out_CaregiverName\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022out_CaregiverPhone\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    },\n    \u0022out_EtaMinutes\u0022: {\n      \u0022type\u0022: \u0022integer\u0022,\n      \u0022minimum\u0022: -2147483648,\n      \u0022maximum\u0022: 2147483647\n    },\n    \u0022out_Assigned\u0022: {\n      \u0022type\u0022: \u0022boolean\u0022\n    }\n  }\n}",
+      "hiddenForAttendedUser": false,
+      "alwaysRunning": false,
+      "autoStartProcess": false,
+      "targetFrameworkValue": "Windows",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": "[{\u0022UniqueId\u0022:\u00229506b84a-2b52-4773-aa8f-953671a26555\u0022,\u0022Path\u0022:\u0022Main.xaml\u0022,\u0022DisplayName\u0022:null,\u0022InputArguments\u0022:\u0022{\\n  \\\u0022type\\\u0022: \\\u0022object\\\u0022,\\n  \\\u0022properties\\\u0022: {\\n    \\\u0022in_LocationAddress\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022in_Latitude\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022number\\\u0022,\\n      \\\u0022minimum\\\u0022: -1.7976931348623157E\u002B308,\\n      \\\u0022maximum\\\u0022: 1.7976931348623157E\u002B308\\n    },\\n    \\\u0022in_Longitude\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022number\\\u0022,\\n      \\\u0022minimum\\\u0022: -1.7976931348623157E\u002B308,\\n      \\\u0022maximum\\\u0022: 1.7976931348623157E\u002B308\\n    },\\n    \\\u0022in_SeverityScore\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022number\\\u0022,\\n      \\\u0022minimum\\\u0022: -1.7976931348623157E\u002B308,\\n      \\\u0022maximum\\\u0022: 1.7976931348623157E\u002B308\\n    },\\n    \\\u0022in_EmergencyType\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022in_CaseId\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022in_ApiBaseUrl\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    }\\n  },\\n  \\\u0022required\\\u0022: []\\n}\u0022,\u0022OutputArguments\u0022:\u0022{\\n  \\\u0022type\\\u0022: \\\u0022object\\\u0022,\\n  \\\u0022properties\\\u0022: {\\n    \\\u0022out_CaregiverId\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022out_CaregiverName\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022out_CaregiverPhone\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    },\\n    \\\u0022out_EtaMinutes\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022integer\\\u0022,\\n      \\\u0022minimum\\\u0022: -2147483648,\\n      \\\u0022maximum\\\u0022: 2147483647\\n    },\\n    \\\u0022out_Assigned\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022boolean\\\u0022\\n    }\\n  }\\n}\u0022,\u0022Type\u0022:1,\u0022TargetRuntime\u0022:null,\u0022ContentRoot\u0022:null,\u0022DataVariation\u0022:null,\u0022Id\u0022:13866636}]",
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "0e1bbcf3-cbb3-4698-8b97-188ffba3e13c"
+  }
+}

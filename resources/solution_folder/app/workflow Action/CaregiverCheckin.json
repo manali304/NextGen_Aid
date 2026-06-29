@@ -1,0 +1,45 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "CaregiverCheckin",
+    "kind": "app",
+    "type": "workflow Action",
+    "apiVersion": "apps.uipath.com/v1",
+    "projectKey": "c855a593-af92-4a8e-a06c-c37aff92b547",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "CaregiverCheckin",
+        "kind": "appVersion"
+      },
+      {
+        "name": "CaregiverCheckin",
+        "kind": "process"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "CaregiverCheckin",
+      "description": null,
+      "type": "workflow Action",
+      "version": null,
+      "appSystemName": null,
+      "appVersionRef": {
+        "key": "600ba9ac-53d3-434a-99f1-80005f190f7b"
+      },
+      "codeBehindProcess": {
+        "key": "05320d32-c20e-4192-8aae-610eea2979d7"
+      },
+      "actionSchema": null,
+      "manualActivationActions": null
+    },
+    "locks": [],
+    "key": "714f0e3a-07ad-4057-b5f5-4ca171f3f6a0"
+  }
+}

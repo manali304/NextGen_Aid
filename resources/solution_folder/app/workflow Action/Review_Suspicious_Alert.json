@@ -1,0 +1,45 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Review Suspicious Alert",
+    "kind": "app",
+    "type": "workflow Action",
+    "apiVersion": "apps.uipath.com/v1",
+    "projectKey": "2338aa93-28dc-4586-bbde-394d1fe432a2",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "Review Suspicious Alert",
+        "kind": "appVersion"
+      },
+      {
+        "name": "Review Suspicious Alert",
+        "kind": "process"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "name": "Review Suspicious Alert",
+      "description": null,
+      "type": "workflow Action",
+      "version": null,
+      "appSystemName": null,
+      "appVersionRef": {
+        "key": "e73915c7-c833-40b5-ab39-29df033895a2"
+      },
+      "codeBehindProcess": {
+        "key": "68927c76-493c-4fd4-ba86-0b9e8d66e60d"
+      },
+      "actionSchema": null,
+      "manualActivationActions": null
+    },
+    "locks": [],
+    "key": "2ec8d87f-be44-48c7-82d4-f479af2ab330"
+  }
+}

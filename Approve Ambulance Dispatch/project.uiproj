@@ -1,0 +1,10 @@
+{
+  "ProjectType": "WebApp",
+  "WebAppSettings": {
+    "AppId": "IDafaf9ec661a44156b5dc2d74cc821693",
+    "IsCoreProject": true
+  },
+  "Name": "Approve Ambulance Dispatch",
+  "Description": null,
+  "MainFile": "Main.xaml"
+}

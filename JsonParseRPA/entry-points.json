@@ -1,0 +1,58 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "784d7264-0502-4418-a91d-3f1b1792e337",
+      "type": "Process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "in_RequestBody": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "in_ElderId": {
+            "type": "string"
+          },
+          "in_RawText": {
+            "type": "string"
+          },
+          "in_Location": {
+            "type": "string"
+          },
+          "in_EmergencyType": {
+            "type": "string"
+          },
+          "in_Severity": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "out_summary": {
+            "type": "string"
+          },
+          "out_lat": {
+            "type": "number",
+            "minimum": -1.7976931348623157E+308,
+            "maximum": 1.7976931348623157E+308
+          },
+          "out_lon": {
+            "type": "number",
+            "minimum": -1.7976931348623157E+308,
+            "maximum": 1.7976931348623157E+308
+          },
+          "in_SeverityLabel": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

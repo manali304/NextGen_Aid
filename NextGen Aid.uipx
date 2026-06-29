@@ -1,0 +1,38 @@
+{
+  "DocVersion": "1.0.0",
+  "StudioMinVersion": "2025.04.0",
+  "SolutionId": "71476eeb-60b8-4e1d-d17c-08dec8f2123b",
+  "Projects": [
+    {
+      "Type": "CaseManagement",
+      "ProjectRelativePath": "ElderCare Emergency Response/project.uiproj",
+      "Id": "799a4baa-2f8f-40fd-87ed-b1f50f65a539"
+    },
+    {
+      "Type": "ProcessOrchestration",
+      "ProjectRelativePath": "Agentic Process/project.uiproj",
+      "Id": "840db2a9-023b-4c5c-a594-fec8c37ac705"
+    },
+    {
+      "Type": "Process",
+      "ProjectRelativePath": "JsonParseRPA/project.uiproj",
+      "Id": "46cb810a-b184-4e16-9667-66935fd8f139"
+    },
+    {
+      "Type": "WebApp",
+      "ProjectRelativePath": "Review Suspicious Alert/project.uiproj",
+      "Id": "2338aa93-28dc-4586-bbde-394d1fe432a2"
+    },
+    {
+      "Type": "WebApp",
+      "ProjectRelativePath": "CaregiverCheckin/project.uiproj",
+      "Id": "c855a593-af92-4a8e-a06c-c37aff92b547"
+    },
+    {
+      "Type": "WebApp",
+      "ProjectRelativePath": "Approve Ambulance Dispatch/project.uiproj",
+      "Id": "7624bc13-bfdb-4896-9396-096f07a2c637"
+    }
+  ],
+  "AutomationHubIdeaUrl": null
+}

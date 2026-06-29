@@ -1,0 +1,320 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "resource": "EventTrigger",
+      "key": "731c779e-08cf-4830-8699-86066b8966eb_trigger_1",
+      "id": "EventTrigger731c779e-08cf-4830-8699-86066b8966eb_trigger_1",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "731c779e-08cf-4830-8699-86066b8966eb",
+          "isExpression": false
+        },
+        "EntryPointUniqueId": {
+          "defaultValue": "c67ca933-10b4-4339-8993-9e0ffeb047b0",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "UseConnectionService": "true",
+        "Connector": "uipath-http-webhook",
+        "ActivityName": "Trigger",
+        "BindingsVersion": "2.2",
+        "ObjectName": "HTTP_WEBHOOK",
+        "Operation": "GENERIC",
+        "FilterExpression": ""
+      }
+    },
+    {
+      "resource": "process",
+      "key": "EmergencyDetector",
+      "id": "processEmergencyDetector",
+      "value": {
+        "name": {
+          "defaultValue": "EmergencyDetector",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "EmergencyDetector",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "app",
+      "key": "=bindings.bL2N7caGi.CaregiverCheckin",
+      "id": "app=bindings.bL2N7caGi.CaregiverCheckin",
+      "value": {
+        "folderPath": {
+          "defaultValue": "=bindings.bL2N7caGi",
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "CaregiverCheckin",
+          "isExpression": false,
+          "displayName": "App name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "CaregiverCheckin",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "app",
+      "key": "=bindings.bUOMc0GMt.Review Suspicious Alert",
+      "id": "app=bindings.bUOMc0GMt.Review Suspicious Alert",
+      "value": {
+        "folderPath": {
+          "defaultValue": "=bindings.bUOMc0GMt",
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "Review Suspicious Alert",
+          "isExpression": false,
+          "displayName": "App name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Review Suspicious Alert ",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "WhatsAppNotifier",
+      "id": "processWhatsAppNotifier",
+      "value": {
+        "name": {
+          "defaultValue": "WhatsAppNotifier",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "WhatsAppNotifier",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "app",
+      "key": "manali.n@boundaryless.com's workspace/Debug_NextGen Aid.Approve Ambulance Dispatch",
+      "id": "appmanali.n@boundaryless.com's workspace/Debug_NextGen Aid.Approve Ambulance Dispatch",
+      "value": {
+        "folderPath": {
+          "defaultValue": "manali.n@boundaryless.com's workspace/Debug_NextGen Aid",
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "Approve Ambulance Dispatch",
+          "isExpression": false,
+          "displayName": "App name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Approve Ambulance Dispatch",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "Connection",
+      "key": "731c779e-08cf-4830-8699-86066b8966eb",
+      "id": "Connection731c779e-08cf-4830-8699-86066b8966eb",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "731c779e-08cf-4830-8699-86066b8966eb",
+          "isExpression": false,
+          "displayName": "uipath-http-webhook connection"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Trigger",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "uipath-http-webhook connection",
+        "UseConnectionService": "true",
+        "Connector": "uipath-http-webhook"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "FraudGuard",
+      "id": "processFraudGuard",
+      "value": {
+        "name": {
+          "defaultValue": "FraudGuard",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "FraudGuard",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "SeverityScorer",
+      "id": "processSeverityScorer",
+      "value": {
+        "name": {
+          "defaultValue": "SeverityScorer",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "SeverityScorer",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "HospitalFinder",
+      "id": "processHospitalFinder",
+      "value": {
+        "name": {
+          "defaultValue": "HospitalFinder",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "HospitalFinder",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "CaregiverMatcher",
+      "id": "processCaregiverMatcher",
+      "value": {
+        "name": {
+          "defaultValue": "CaregiverMatcher",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "CaregiverMatcher",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "AmbulanceDispatch",
+      "id": "processAmbulanceDispatch",
+      "value": {
+        "name": {
+          "defaultValue": "AmbulanceDispatch",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "AmbulanceDispatch",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "NotifyAllDispatch",
+      "id": "processNotifyAllDispatch",
+      "value": {
+        "name": {
+          "defaultValue": "NotifyAllDispatch",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "NotifyAllDispatch",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "AmbulanceTracker",
+      "id": "processAmbulanceTracker",
+      "value": {
+        "name": {
+          "defaultValue": "AmbulanceTracker",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "AmbulanceTracker",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "CaseCloser",
+      "id": "processCaseCloser",
+      "value": {
+        "name": {
+          "defaultValue": "CaseCloser",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "CaseCloser",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "=bindings.bK8xIMoYF.JsonParseRPA",
+      "id": "process=bindings.bK8xIMoYF.JsonParseRPA",
+      "value": {
+        "folderPath": {
+          "defaultValue": "=bindings.bK8xIMoYF",
+          "isExpression": false,
+          "displayName": "Folder path"
+        },
+        "name": {
+          "defaultValue": "JsonParseRPA",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "JsonParseRPA",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    }
+  ]
+}

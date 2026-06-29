@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "CaregiverCheckin",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "c855a593-af92-4a8e-a06c-c37aff92b547",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "CaregiverCheckin",
+      "description": null
+    },
+    "locks": [],
+    "key": "a9c3bf0c-c4bf-474f-bb76-f54b8f50c7d7"
+  }
+}

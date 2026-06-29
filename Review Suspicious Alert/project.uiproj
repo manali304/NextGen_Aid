@@ -1,0 +1,10 @@
+{
+  "ProjectType": "WebApp",
+  "WebAppSettings": {
+    "AppId": "IDbd15e9a933904e41b331f9c6fc20ec35",
+    "IsCoreProject": true
+  },
+  "Name": "Review Suspicious Alert",
+  "Description": null,
+  "MainFile": "Main.xaml"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "$id": "entry-points.json",
+  "entryPoints": [
+    {
+      "filePath": "/content/eldercare_emergency.bpmn#start_event",
+      "uniqueId": "3844a71d-8524-41c6-995c-98adcf3f162c",
+      "type": "ProcessOrchestration",
+      "input": {
+        "type": "object",
+        "properties": {}
+      },
+      "output": {
+        "type": "object",
+        "properties": {}
+      },
+      "displayName": "Emergency\nSignal Received"
+    }
+  ]
+}

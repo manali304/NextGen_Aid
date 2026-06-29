@@ -1,0 +1,6 @@
+{
+  "ProjectType": "Process",
+  "Name": "JsonParseRPA",
+  "Description": null,
+  "MainFile": "Main.xaml"
+}
